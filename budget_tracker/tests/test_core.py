@@ -1,9 +1,10 @@
+
 import os
 import tempfile
 import unittest
 from datetime import datetime
 
-from budget_tracker.core.logic import Logic
+from core.logic import Logic
 
 
 class TestLogic(unittest.TestCase):
@@ -25,7 +26,7 @@ class TestLogic(unittest.TestCase):
         rows = self.logic.db.get_all_transactions()
         return rows[-1][0]
 
-    # ---------- проверки ----------
+    #проверки
 
     def test_date_validation_ok(self):
         self.logic.date_validation("01.01.25")
@@ -50,7 +51,7 @@ from unittest.mock import Mock, patch
 # Добавляем путь к папке core для импорта
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'core'))
 
-from main import BudgetApp
+from core.main import BudgetApp
 
 
 class TestBudgetApp(unittest.TestCase):
@@ -143,14 +144,14 @@ if __name__ == "__main__":
         with self.assertRaises(ValueError):
             self.logic.type_validation(None)
 
-    # ---------- служебное ----------
+    #служебное
 
     def test_translate_type_ok(self):
         self.assertEqual(self.logic.translate_type("income"), "Доход")
         self.assertEqual(self.logic.translate_type("expense"), "Расход")
         self.assertEqual(self.logic.translate_type("other"), "other")
 
-    # ---------- транзакции ----------
+    #транзакции
 
     def test_add_transaction_income_updates_balance(self):
         self.logic.add_transaction("income", 100, "ЗП", "01.01.25")
@@ -269,7 +270,7 @@ if __name__ == "__main__":
         with self.assertRaises(ValueError):
             self.logic.edit_transaction(tid, "income", 3, "Еда", "2025-01-01")
 
-    # ---------- копилки ----------
+    #копилки
 
     def test_calculate_progress_ok(self):
         goal = (1, "Ноутбук", 1000.0, 250.0)
@@ -321,7 +322,7 @@ if __name__ == "__main__":
         with self.assertRaises(ValueError):
             self.logic._find_goal_row(gid)
 
-    # ---------- фильтрация ----------
+    #фильтрация
 
     def test_filter_transactions_by_date_range_ok(self):
         self.logic.add_income(100, "ЗП", "01.01.25")
@@ -345,3 +346,75 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# Импортируем все необходимые библиотеки:
+# os - для работы с операционной системой (чтобы работать с файлами и проверять существование тестовой базы данных)
+# sqlite3 - для работы с базой данных
+# unittest - используется для написания тестов
+import os
+import sqlite3
+import unittest
+
+# Импортируем класс DataBase, который будет тестироваться 
+from core.database import DataBase
+
+# Определяем класс Тестов. 
+# Он наследуется от unittest.TestCase, что позволяет использовать методы assertEqual, setUp и т.д.
+class DataBaseTest(unittest.TestCase):
+
+    # Передаем имя файла тестовой базы данных, каждый тест будет работать с этим файлом
+    TEST_DB = "test_db.sqlite"
+
+    # Метод, который выполняется перед каждым тестом автоматически. 
+    def setUp(self):
+
+         # Проверяем остался ли файл базы данных от предыдущего теста, 
+        if os.path.exists(self.TEST_DB):
+
+            # Если да, то удаляем его (чтобы начинать каждый тест «с нуля»)
+            os.remove(self.TEST_DB)
+        
+        # Создаем оъект базы данных, указываем путь до тестового файла
+        self.db = DataBase(self.TEST_DB)
+        # Создаем таблицу в базе данных, через метод импортированного ранее класса DataBase
+        self.db.create_db()
+
+    # Объявляем тест, который проверяет добавление информации в базу данных
+    def test_add_in_db(self):
+
+        # Добавляем транзакцию через метод импортированного ранее класса DataBase, который мы и тестируем
+        self.db.add_transaction(10000.06, "food", "15.11.2025", "доход")
+
+        # Вручную открываем подключение к базе данных, чтобы проверить содержимое (и сразу закрываем подключение)
+        with sqlite3.connect(self.TEST_DB) as db:
+            # Создаем курсор - объект, который позволяет выполнять команды SQL
+            cursor = db.cursor()
+            # Получаем все строки из таблицы базы данных
+            cursor.execute("SELECT * FROM transactions")
+            # Записываем данные в переменную
+            result = cursor.fetchall()
+
+        # Формируем ожидаемый результат (то, как должна выглядеть таблица)
+        expected = [(1, 10000.06, "food", "15.11.2025", "доход")]
+        # Сравниваем результат с ожиданием
+        self.assertEqual(result, expected)
+
+    # Объявляем тест, который проверяет коректное получение информации из базы данных
+    def test_get_db(self):
+        # Добавляем транзакции через метод импортированного ранее класса DataBase
+        self.db.add_transaction(100, "transport", "2024-05-05", "расход")
+        self.db.add_transaction(500, "salary", "2024-05-10", "доход")
+        # Получа все транзакции через метод импортированного ранее класса DataBase, который мы и тестируем
+        rows = self.db.get_all_transactions()
+        # Проверяем, что записей в таблице ровно 2
+        self.assertEqual(len(rows), 2)
+        # Проверяем, что в 1 строке(0 индекс) и 3 столбце(2 индекс, столбец считается 3, 
+        # т.к поле ID стоящее на 0 индексе подразумевается, но не прописывается) 
+        # соответствует категории - "transport"
+        self.assertEqual(rows[0][2],"transport")
+        # Проверяем, что во 2 строке(1 индекс) и 4 столбце(3 индекс, столбец считается 4, 
+        # т.к поле ID стоящее на 0 индексе подразумевается, но не прописывается) 
+        # соответствует дате - "2024-05-10"
+        self.assertEqual(rows[1][3],"2024-05-10")
+
