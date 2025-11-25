@@ -1,4 +1,3 @@
-
 import os
 import tempfile
 import unittest
@@ -347,7 +346,6 @@ if __name__ == "__main__":
 if __name__ == "__main__":
     unittest.main()
 
-
 # Импортируем все необходимые библиотеки:
 # os - для работы с операционной системой (чтобы работать с файлами и проверять существование тестовой базы данных)
 # sqlite3 - для работы с базой данных
@@ -356,65 +354,79 @@ import os
 import sqlite3
 import unittest
 
-# Импортируем класс DataBase, который будет тестироваться 
 from core.database import DataBase
 
-# Определяем класс Тестов. 
-# Он наследуется от unittest.TestCase, что позволяет использовать методы assertEqual, setUp и т.д.
+
 class DataBaseTest(unittest.TestCase):
 
-    # Передаем имя файла тестовой базы данных, каждый тест будет работать с этим файлом
+    """
+        Набор тестов для проверки функциональности класса DataBase
+
+        Каждый тест использует отдельный тестовый файл SQLite, 
+        который создаётся в setUp() и удаляется перед созданием нового
+    """
+
     TEST_DB = "test_db.sqlite"
 
-    # Метод, который выполняется перед каждым тестом автоматически. 
     def setUp(self):
+        """
+            Метод, выполняющийся перед каждым тестом
 
-         # Проверяем остался ли файл базы данных от предыдущего теста, 
+            - удаляет тестовую БД, если она осталась от предыдущего теста
+            - создаёт новый экземпляр DataBase
+            - создаёт таблицу transactions вызовом create_db()
+
+        """
+
         if os.path.exists(self.TEST_DB):
-
-            # Если да, то удаляем его (чтобы начинать каждый тест «с нуля»)
             os.remove(self.TEST_DB)
         
-        # Создаем оъект базы данных, указываем путь до тестового файла
         self.db = DataBase(self.TEST_DB)
-        # Создаем таблицу в базе данных, через метод импортированного ранее класса DataBase
         self.db.create_db()
 
-    # Объявляем тест, который проверяет добавление информации в базу данных
     def test_add_in_db(self):
-
-        # Добавляем транзакцию через метод импортированного ранее класса DataBase, который мы и тестируем
         self.db.add_transaction(10000.06, "food", "15.11.2025", "доход")
-
-        # Вручную открываем подключение к базе данных, чтобы проверить содержимое (и сразу закрываем подключение)
         with sqlite3.connect(self.TEST_DB) as db:
-            # Создаем курсор - объект, который позволяет выполнять команды SQL
             cursor = db.cursor()
-            # Получаем все строки из таблицы базы данных
             cursor.execute("SELECT * FROM transactions")
-            # Записываем данные в переменную
             result = cursor.fetchall()
-
-        # Формируем ожидаемый результат (то, как должна выглядеть таблица)
         expected = [(1, 10000.06, "food", "15.11.2025", "доход")]
-        # Сравниваем результат с ожиданием
         self.assertEqual(result, expected)
 
-    # Объявляем тест, который проверяет коректное получение информации из базы данных
     def test_get_db(self):
-        # Добавляем транзакции через метод импортированного ранее класса DataBase
-        self.db.add_transaction(100, "transport", "2024-05-05", "расход")
-        self.db.add_transaction(500, "salary", "2024-05-10", "доход")
-        # Получа все транзакции через метод импортированного ранее класса DataBase, который мы и тестируем
+        self.db.add_transaction(100, "transport", "05.05.2025", "расход")
+        self.db.add_transaction(500, "salary", "20.03.2024", "доход")
         rows = self.db.get_all_transactions()
-        # Проверяем, что записей в таблице ровно 2
         self.assertEqual(len(rows), 2)
-        # Проверяем, что в 1 строке(0 индекс) и 3 столбце(2 индекс, столбец считается 3, 
-        # т.к поле ID стоящее на 0 индексе подразумевается, но не прописывается) 
-        # соответствует категории - "transport"
         self.assertEqual(rows[0][2],"transport")
+
         # Проверяем, что во 2 строке(1 индекс) и 4 столбце(3 индекс, столбец считается 4, 
         # т.к поле ID стоящее на 0 индексе подразумевается, но не прописывается) 
         # соответствует дате - "2024-05-10"
         self.assertEqual(rows[1][3],"2024-05-10")
+        self.assertEqual(rows[1][3],"20.03.2024")
 
+    def test_get_transaction(self):
+         self.db.add_transaction(320, "transport", "15.06.2022", "расход")
+         self.db.add_transaction(10000, "salary", "11.07.2024", "доход")
+         self.db.add_transaction(7000, "salary", "04.08.2024", "доход")
+         rows = self.db.get_transaction(3)
+         self.assertEqual(rows[1],7000)
+         self.assertEqual(rows[2],"salary")
+         self.assertEqual(rows[3],"04.08.2024")
+         self.assertEqual(rows[4],"доход")
+
+    def test_delete_transctions(self):
+        self.db.add_transaction(1000, "food", "16.10.2025", "расход")
+        self.db.add_transaction(15000, "salary", "13.03.2025", "доход")
+        row = self.db.delete_transaction(1)
+        self.assertIsNone(row)
+
+    def test_update_transaction(self):
+        self.db.add_transaction(1000, "food", "16.10.2025", "расход")
+        self.db.update_transaction(1, 250, "cafe", "09.09.2023", "расход")
+        updated_row = self.db.get_transaction(1)
+        self.assertEqual(updated_row[1], 250)
+        self.assertEqual(updated_row[2], "cafe")
+        self.assertEqual(updated_row[3], "09.09.2023")
+        self.assertEqual(updated_row[4], "расход")
