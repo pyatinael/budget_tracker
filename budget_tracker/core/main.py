@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from datetime import datetime
 from logic import Logic
 
@@ -44,9 +46,9 @@ class BudgetApp(tk.Tk):
         ttk.Entry(form_frame, textvariable=self.category_var, width=30).grid(row=1, column=1, columnspan=3, padx=5,
                                                                              pady=5, sticky="w")
 
-        # Дата в формате YYYY-MM-DD (по умолчанию - сегодня)
-        ttk.Label(form_frame, text="Дата (YYYY-MM-DD):").grid(row=2, column=0, padx=5, pady=5, sticky="w")
-        self.date_var = tk.StringVar(value=datetime.today().strftime("%Y-%m-%d"))
+        # Дата в формате DD.MM.YYYY (по умолчанию - сегодня)
+        ttk.Label(form_frame, text="Дата (DD.MM.YYYY):").grid(row=2, column=0, padx=5, pady=5, sticky="w")
+        self.date_var = tk.StringVar(value=datetime.today().strftime("%d.%m.%y"))
         ttk.Entry(form_frame, textvariable=self.date_var, width=15).grid(row=2, column=1, padx=5, pady=5, sticky="w")
 
         ttk.Button(form_frame, text="Добавить", command=self._on_add).grid(row=2, column=3, padx=5, pady=5, sticky="e")
@@ -83,8 +85,11 @@ class BudgetApp(tk.Tk):
         bottom_frame = ttk.Frame(self)
         bottom_frame.pack(fill="x", padx=10, pady=10)
 
-        ttk.Button(bottom_frame, text="Показать статистику", command=self._on_show_stats).pack(side="left")
+        ttk.Button(bottom_frame, text="Показать статистику", command=self._on_show_stats).pack(side="left",padx=5)
         ttk.Button(bottom_frame, text="Обновить список", command=self._on_refresh).pack(side="left", padx=5)
+        ttk.Button(bottom_frame, text="Показать диаграмму расходов", command=self.get_statistics).pack(side="left", padx=5)
+        ttk.Button(bottom_frame, text="Показать график баланса", command=self.get_info).pack(side="left", padx=5)
+
 
     def _on_add(self):
         """Обработка добавления новой транзакции"""
@@ -102,14 +107,16 @@ class BudgetApp(tk.Tk):
                 self.logic.add_income(amount, category, date_str)
             else:
                 self.logic.add_expenses(amount, category, date_str)
-
+            
             # Очистка полей после успешного добавления
             self.amount_var.set("")
             self.category_var.set("")
 
             # Обновление таблицы и вывод уведомления
+            self.logic.load_transactions()
             self._load_transactions_to_table()
             self.status_var.set("Транзакция добавлена")
+
 
         except ValueError as e:
             # Ошибка валидации (неверный формат данных)
@@ -144,6 +151,57 @@ class BudgetApp(tk.Tk):
             f"Общие расходы: {expense:.2f}\n"
             f"Баланс: {balance:.2f}"
         )
+    def pie_chart(self,categories_dict, window_):
+        categories = list(categories_dict.keys())
+        category_amount = list(categories_dict.values())
+        
+        fig, ax = plt.subplots(figsize = (5,5))
+        ax.pie(category_amount, labels = categories, autopct = "%1.1f%%",startangle = 90)
+        ax.axis("equal")
+        pie_chart_window = tk.Toplevel(window_)
+        pie_chart_window.title("Статистика расходов")
+
+
+    def get_statistics(self):
+        self.logic.load_transactions()
+        categories = {}
+        for transaction in self.logic.transactions:
+            if transaction[0] == "Расход":
+                category = transaction[2]
+                amount = float(transaction[1])
+                categories[category] = categories.get(category,0) + amount
+            if not categories:
+                messagebox.showinfo("Статистика", "Нет данных для построения диаграммы")
+                return
+
+        self.pie_chart(categories,self)
+
+    def graph(self,dates_list,window_):
+        dates = [d for d, b in dates_list]
+        balances = [b for d,b in dates_list]
+
+        window_ = tk.Toplevel(window_)
+        window_.title("Баланс по дням")
+        fig, ax = plt.subplots(figsize=(7,4))
+        ax.plot(dates, balances)
+        ax.set_title("Изменение баланса")
+        ax.set_xlabel("Дата")
+        ax.set_ylabel("Баланс")
+        ax.grid(True)
+
+        fig.autofmt_xdate(rotation=45)
+        
+
+        if not dates:
+            messagebox.showinfo("График", "Нет данных для статистики")
+            return
+        
+    def get_info(self):
+        self.logic.load_transactions()
+        daily = self.logic.get_balance_by_date()
+
+        self.graph(daily,self)
+
 
 
 if __name__ == "__main__":
