@@ -226,7 +226,7 @@ class Logic:
         self.savings_db.update_goal_amount(id_, name, target_amount, new_current)
 
         # пишем расход в обычную таблицу transactions
-        today = datetime.now().strftime("%Y-%m-%d")
+        today = datetime.now().strftime("%d.%m.%y")
         self.add_expenses(amount, f"Накопления: {name}", today)
         # баланс пересчитается внутри add_expenses
 
@@ -249,6 +249,6 @@ class Logic:
         self.savings_db.update_goal_amount(id_, name, target_amount, new_current)
 
         # закидываем доход на счёт
-        today = datetime.now().strftime("%Y-%m-%d")
+        today = datetime.now().strftime("%d.%m.%y")
         self.add_income(amount, f"Возврат из накоплений: {name}", today)
         # баланс тоже обновится
