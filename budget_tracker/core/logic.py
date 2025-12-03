@@ -27,13 +27,13 @@ class Logic:
 
     def date_validation(self, date_str):
         """
-        Проверяем, записана ли дата в формате 'YYYY-MM-DD'.
+        Проверяем, записана ли дата в формате "%d.%m.%y"'.
         Если формат неверный, то возвращаем ValueError.
         """
         try:
-            datetime.strptime(date_str, "%Y-%m-%d")
+            datetime.strptime(date_str, "%d.%m.%y")
         except ValueError:
-            raise ValueError("Неправильная дата. Нужен формат YYYY-MM-DD")
+            raise ValueError("Неправильная дата. Нужен формат "'%d.%m.%y'")
 
     def amount_validation(self, summ):
         """
@@ -195,6 +195,13 @@ class Logic:
 
         return result
 
+    def translate_type(self, t_type):
+        if t_type == "income":
+            return "Доход"
+        elif t_type == "expense":
+            return "Расход"
+        return t_type
+        
     # ---------- цели (накопления) ----------
 
     def calculate_progress(self, goal):
@@ -252,3 +259,4 @@ class Logic:
         today = datetime.now().strftime("%d.%m.%y")
         self.add_income(amount, f"Возврат из накоплений: {name}", today)
         # баланс тоже обновится
+
