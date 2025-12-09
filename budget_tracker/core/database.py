@@ -141,7 +141,7 @@ class DataBaseForSavings:
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT,
                     target_amount REAL,
-                    current_amount REAL,
+                    current_amount REAL
                 )
             """          
             cursor.execute(query)
