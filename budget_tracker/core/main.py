@@ -151,56 +151,71 @@ class BudgetApp(tk.Tk):
             f"Общие расходы: {expense:.2f}\n"
             f"Баланс: {balance:.2f}"
         )
-    def pie_chart(self,categories_dict, window_):
-        categories = list(categories_dict.keys())
-        category_amount = list(categories_dict.values())
-        
-        fig, ax = plt.subplots(figsize = (5,5))
-        ax.pie(category_amount, labels = categories, autopct = "%1.1f%%",startangle = 90)
+
+    def pie_chart(self, categories_dict, window_):
+        if not categories_dict:
+            messagebox.showinfo("Статистика", "Нет данных для построения диаграммы")
+            return
+
+        fig, ax = plt.subplots(figsize=(5,5))
+        ax.pie(categories_dict.values(), labels=categories_dict.keys(), autopct="%1.1f%%", startangle=90)
         ax.axis("equal")
+
+        # Создаём окно Tkinter
         pie_chart_window = tk.Toplevel(window_)
         pie_chart_window.title("Статистика расходов")
 
+        # Вставляем matplotlib в окно
+        canvas = FigureCanvasTkAgg(fig, master=pie_chart_window)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill='both', expand=True)
 
     def get_statistics(self):
         self.logic.load_transactions()
         categories = {}
         for transaction in self.logic.transactions:
-            if transaction[0] == "Расход":
+            if transaction[0] == "expense":
                 category = transaction[2]
                 amount = float(transaction[1])
                 categories[category] = categories.get(category,0) + amount
-            if not categories:
-                messagebox.showinfo("Статистика", "Нет данных для построения диаграммы")
-                return
+        if not categories:
+            messagebox.showinfo("Статистика", "Нет данных для построения диаграммы")
+            return
 
         self.pie_chart(categories,self)
 
-    def graph(self,dates_list,window_):
-        dates = [d for d, b in dates_list]
-        balances = [b for d,b in dates_list]
+    def graph(self, dates_list, window_):
+        if not dates_list:
+            messagebox.showinfo("График", "Нет данных для статистики")
+            return
 
-        window_ = tk.Toplevel(window_)
-        window_.title("Баланс по дням")
-        fig, ax = plt.subplots(figsize=(7,4))
+        dates = [d for d, b in dates_list]
+        balances = [b for d, b in dates_list]
+
+        graph_window = tk.Toplevel(window_)
+        graph_window.title("Баланс по дням")
+
+        fig, ax = plt.subplots(figsize=(7, 4))
         ax.plot(dates, balances)
         ax.set_title("Изменение баланса")
         ax.set_xlabel("Дата")
         ax.set_ylabel("Баланс")
         ax.grid(True)
-
         fig.autofmt_xdate(rotation=45)
-        
 
-        if not dates:
-            messagebox.showinfo("График", "Нет данных для статистики")
-            return
+        graph_window.canvas = FigureCanvasTkAgg(fig, master=graph_window)
+        graph_window.canvas.draw()
+        graph_window.canvas.get_tk_widget().pack(fill='both', expand=True)
         
     def get_info(self):
         self.logic.load_transactions()
         daily = self.logic.get_balance_by_date()
 
-        self.graph(daily,self)
+        if daily == "Нет данных":
+            messagebox.showinfo("График", "Нет данных для статистики")
+            return
+
+        self.graph(daily, self)
 
 
 
