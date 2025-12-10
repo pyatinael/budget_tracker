@@ -108,3 +108,96 @@ class DataBase:
             query = """ UPDATE transactions SET amount=?, category=?, date=?, type=? WHERE id=? """
             cursor.execute(query, (amount, category, date, type_, id))
             db.commit()
+
+
+class DataBaseForSavings:
+    """
+        Класс для работы с базой данных SQLite, содержащий таблицу savings
+        path: str путь к файлу базы данных SQLite
+    """
+
+    def __init__(self, path):
+        """
+            Конструктор класса
+            path: str путь к файлу базы данных SQLite
+        """
+        self.path = path
+
+    def create_db(self):
+        """
+            Метод, отвечающий за создание таблицы savings, при условии: что она еще не создана
+
+            В таблице есть поля:
+            id: INTEGER PRIMARY KEY, AUTOINCREMENT,
+            name: TEXT,
+            target_amount: REAL,
+            current_amount: REAL
+
+            Метод автоматически открывает и закрывает соединение
+        """
+        with sqlite3.connect(self.path) as db:
+            cursor = db.cursor()
+            query = """
+                CREATE TABLE IF NOT EXISTS savings (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT,
+                    target_amount REAL,
+                    current_amount REAL
+                )
+            """
+            cursor.execute(query)
+            db.commit()
+
+    def add_goal(self, name, target_amount, current_amount):
+        """
+            Добавляет новую запись в таблицу savings
+
+            name: str название цели
+            target_amount: float сколько нужно накопить
+            current_amount: float сколько накоплено
+
+        """
+        with sqlite3.connect(self.path) as db:
+            cursor = db.cursor()
+            query = """
+                INSERT INTO savings (name, target_amount, current_amount)
+                VALUES (?, ?, ?)
+            """
+            cursor.execute(query, (name, target_amount, current_amount))
+            db.commit()
+
+    def get_goal(self):
+        """
+            Возвращает список всех целей (список кортежей, кортеж - строка таблицы) из таблицы savings
+        """
+        with sqlite3.connect(self.path) as db:
+            cursor = db.cursor()
+            cursor.execute("SELECT * FROM savings")
+            return cursor.fetchall()
+
+    def delete_goal(self, id):
+        """
+            Удаляет цель по её ID
+
+            id : int идентификатор записи, которую нужно удалить
+        """
+        with sqlite3.connect(self.path) as db:
+            cursor = db.cursor()
+            cursor.execute(""" DELETE FROM savings WHERE id=?""", (id,))
+            db.commit()
+
+    def update_goal_amount(self, id, name, target_amount, current_amount):
+        """
+            Обновляет накопление
+
+            id : int идентификатор записи, которую нужно обновить
+            name : str название цели
+            target_amount : float сколько нужно накопить
+            current_amount: float сколько накоплено
+
+        """
+        with sqlite3.connect(self.path) as db:
+            cursor = db.cursor()
+            query = """ UPDATE savings SET name=?, target_amount=?, current_amount=? WHERE id=? """
+            cursor.execute(query, (name, target_amount, current_amount, id))
+            db.commit()
