@@ -45,9 +45,7 @@ class DataBase:
         except sqlite3.Error as error:
             print("Ошибка при создании таблицы",error)
         except OSError as error:
-            print("Ошибка файлов", error)
-
-        
+            print("Ошибка файлов", error)  
 
     def add_transaction(self, amount, category, date, type_):
         """ 
@@ -73,7 +71,6 @@ class DataBase:
         except OSError as error:
             print("Ошибка файлов", error)
 
-
     def get_all_transactions(self):
         """
             Возвращает список всех транзакций(список кортежей, кортеж - строка таблицы) из таблицы transactions
@@ -87,7 +84,6 @@ class DataBase:
             print("Ошибка при попытке прочтения транзакций:",error)
         except OSError as error:
             print("Ошибка файлов", error)
-    
         
     def get_transaction(self,id):
         """
@@ -142,6 +138,7 @@ class DataBase:
             print("Ошибка при попытке обновить таблицу с транзакциями",error)
         except OSError as error:
             print("Ошибка файлов", error)
+
 
 class DataBaseForSavings:
     """ 
