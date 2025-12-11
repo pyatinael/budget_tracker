@@ -17,6 +17,9 @@ class BudgetApp(tk.Tk):
         # Инициализация бизнес-логики
         self.logic = Logic()
 
+        # Применяем стили
+        self._apply_styles()
+
         # Переменные для фильтрации
         self.date_filter_start = None
         self.date_filter_end = None
@@ -27,6 +30,14 @@ class BudgetApp(tk.Tk):
         self._set_default_date_filter()
         self._load_transactions_to_table()
         self._refresh_savings()
+
+    def _apply_styles(self):
+        """Применяем стили для красивого интерфейса"""
+        style = ttk.Style()
+
+        # Стиль для Treeview (таблицы)
+        style.configure('Treeview', rowheight=25, font=('Arial', 9))
+        style.configure('Treeview.Heading', font=('Arial', 10, 'bold'))
 
     def _create_widgets(self):
         """Создание всех элементов интерфейса"""
@@ -63,7 +74,8 @@ class BudgetApp(tk.Tk):
 
         # Статус
         self.status_var = tk.StringVar()
-        self.status_label = ttk.Label(left_frame, textvariable=self.status_var, foreground="blue")
+        self.status_label = ttk.Label(left_frame, textvariable=self.status_var,
+                                      foreground="#1565C0", font=('Arial', 10))
         self.status_label.pack(fill="x", padx=5, pady=(0, 5))
 
         # Фильтр по периоду
@@ -230,7 +242,7 @@ class BudgetApp(tk.Tk):
             self.status_var.set(f"❌ Ошибка: {e}")
 
     def _load_transactions_to_table(self):
-        """Загрузка с фильтрацией и правильным сохранением ID"""
+        """Загрузка с фильтрацией и цветным выделением"""
         self.logic.load_transactions()
 
         for row in self.tree.get_children():
@@ -251,13 +263,22 @@ class BudgetApp(tk.Tk):
         else:
             filtered_with_ids = all_db_transactions
 
-        # Заполняем таблицу
+        # Заполняем таблицу с цветами
         for row in filtered_with_ids:
             id_, amount, category, date, t_type = row
             display_type = "Доход" if t_type == "income" else "Расход"
-            item_id = self.tree.insert("", "end", values=(display_type, f"{amount:.2f}", category, date))
+
+            # ЦВЕТНОЕ ВЫДЕЛЕНИЕ
+            tag = "income" if t_type == "income" else "expense"
+            item_id = self.tree.insert("", "end",
+                                       values=(display_type, f"{amount:.2f}", category, date),
+                                       tags=(tag,))
             # Сохраняем РЕАЛЬНЫЙ ID из БД
             self.current_transaction_ids[item_id] = id_
+
+        # Настраиваем цвета
+        self.tree.tag_configure("income", foreground="#2E7D32")  # Зеленый для доходов
+        self.tree.tag_configure("expense", foreground="#C62828")  # Красный для расходов
 
     def _on_refresh(self):
         self._load_transactions_to_table()
@@ -321,7 +342,6 @@ class BudgetApp(tk.Tk):
 
     def _on_show_stats(self):
         """Статистика с балансом копилок"""
-        # Получаем данные по транзакциям
         if self.date_filter_start and self.date_filter_end:
             income, expense, balance = self.logic.summarize_transactions_by_range(
                 self.date_filter_start, self.date_filter_end
@@ -336,7 +356,6 @@ class BudgetApp(tk.Tk):
         total_savings = sum(current for _, _, _, current in goals)
         savings_count = len(goals)
 
-        # Показываем ОДИН раз
         messagebox.showinfo("📊 Статистика",
                             f"💰 Доход: {income:.2f}₽\n"
                             f"💸 Расходы: {expense:.2f}₽\n"
@@ -411,7 +430,7 @@ class BudgetApp(tk.Tk):
     # ========== МЕТОДЫ ДЛЯ КОПИЛОК ==========
 
     def _refresh_savings(self):
-        """Обновить список копилок"""
+        """Обновить список копилок с цветным прогрессом"""
         for item in self.savings_tree.get_children():
             self.savings_tree.delete(item)
 
@@ -419,12 +438,32 @@ class BudgetApp(tk.Tk):
         for goal in goals:
             id_, name, target, current = goal
             progress = self.logic.calculate_progress(goal)
+
+            # Определяем тег для цвета
+            if progress >= 100:
+                tag = "complete"
+            elif progress >= 75:
+                tag = "high"
+            elif progress >= 50:
+                tag = "medium"
+            elif progress >= 25:
+                tag = "low"
+            else:
+                tag = "verylow"
+
             self.savings_tree.insert("", "end", values=(
                 name,
                 f"{current:.0f}",
                 f"{target:.0f}",
                 f"{progress:.0f}%"
-            ), tags=(id_,))
+            ), tags=(str(id_), tag))
+
+        # Настраиваем цвета прогресса
+        self.savings_tree.tag_configure("complete", foreground="#1B5E20")  # Темно-зеленый (100%)
+        self.savings_tree.tag_configure("high", foreground="#388E3C")      # Зеленый (75%+)
+        self.savings_tree.tag_configure("medium", foreground="#F57C00")    # Оранжевый (50%+)
+        self.savings_tree.tag_configure("low", foreground="#E64A19")       # Красно-оранжевый (25%+)
+        self.savings_tree.tag_configure("verylow", foreground="#C62828")   # Красный (<25%)
 
     def _add_goal(self):
         """Создать новую копилку"""
