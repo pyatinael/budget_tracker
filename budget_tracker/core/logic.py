@@ -1,6 +1,6 @@
 import sqlite3
 from datetime import datetime
-from .database import DataBase, DataBaseForSavings
+from budget_tracker.core.database import DataBase, DataBaseForSavings
 
 
 class Logic:
