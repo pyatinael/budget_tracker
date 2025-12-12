@@ -235,20 +235,10 @@ class DataBaseForSavings:
         """
         Обновляет данные цели (копилки) в базе данных.
 
-        :param id: идентификатор цели, которую нужно обновить.
-        :type id: int
-        :param name: новое название цели.
-        :type name: str
-        :param target_amount: требуемая сумма для достижения цели.
-        :type target_amount: float
-        :param current_amount: текущая накопленная сумма.
-        :type current_amount: float
-
-        :returns: None
-        :rtype: NoneType
-
-        :raises sqlite3.Error: при ошибках выполнения SQL-запроса.
-        :raises OSError: при ошибках, связанных с файловой системой.
+        id : int идентификатор записи, которую нужно обновить
+        name : str название цели
+        target_amount : float сколько нужно накопить
+        current_amount: float сколько накоплено
         """
         try:
             with sqlite3.connect(self.path) as db:
