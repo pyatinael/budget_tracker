@@ -248,7 +248,7 @@ class DataBaseForSavings:
 
         :raises sqlite3.Error: при ошибках выполнения SQL-запроса.
         :raises OSError: при ошибках, связанных с файловой системой.
-        """
+    """
         try:
             with sqlite3.connect(self.path) as db:
                 cursor = db.cursor()

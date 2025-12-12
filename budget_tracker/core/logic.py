@@ -8,23 +8,19 @@ class Logic:
         """
         Инициализирует основной класс логики приложения.
 
-        Создаёт две базы данных:
-        — базу транзакций;
-        — базу целей (копилок).
-
-        Загружает существующие транзакции, создаёт структуры хранения
+        Создаёт базы данных, загружает транзакции
         и рассчитывает стартовый баланс.
 
-        :param db_path: путь к файлу базы данных с транзакциями.
+        :param db_path: Путь к базе данных транзакций
         :type db_path: str
-        :param savings_db_path: путь к файлу базы данных с целями.
+        :param savings_db_path: Путь к базе данных копилок
         :type savings_db_path: str
-
         :returns: None
         :rtype: NoneType
         """
         self.db = DataBase(db_path)
         self.db.create_db()
+
         self.transactions = []
         self.load_transactions()
 
@@ -34,17 +30,15 @@ class Logic:
         self.balance = 0
         self._update_balance()
 
+    # ---------- проверки ----------
+
     def date_validation(self, date_str):
         """
         Проверяет корректность даты в формате ``"%d.%m.%y"``.
 
-        :param date_str: строка с датой.
+        :param date_str: Дата в формате "dd.mm.yy"
         :type date_str: str
-
-        :returns: None, если дата корректна.
-        :rtype: NoneType
-
-        :raises ValueError: если дата имеет неверный формат или не существует.
+        :raises ValueError: Если дата имеет неверный формат
         """
         try:
             datetime.strptime(date_str, "%d.%m.%y")
@@ -53,17 +47,15 @@ class Logic:
 
     def amount_validation(self, summ):
         """
-        Проверяет корректность суммы и преобразует её к числу с плавающей точкой.
+        Проверяет корректность суммы.
 
-        :param summ: значение, представляющее сумму. Может быть числом или строкой.
-        :type summ: any
-
-        :returns: корректная сумма в виде числа с плавающей точкой.
+        :param summ: Значение суммы
+        :type summ: int or float or str
+        :returns: Корректная сумма
         :rtype: float
-
         :raises ValueError:
-            если значение нельзя преобразовать в число;
-            если сумма меньше или равна нулю.
+            Если сумма не является числом;
+            Если сумма меньше или равна нулю.
         """
         try:
             summ = float(summ)
@@ -75,20 +67,17 @@ class Logic:
 
         return summ
 
-
     def category_validation(self, category):
         """
-        Проверяет корректность категории и возвращает её нормализованное значение.
+        Проверяет корректность категории.
 
-        :param category: строка с названием категории.
+        :param category: Название категории
         :type category: str
-
-        :returns: категорию без лишних пробелов по краям.
+        :returns: Нормализованная категория
         :rtype: str
-
         :raises ValueError:
-            если ``category`` не является строкой;
-            если длина категории после обрезки пробелов превышает 50 символов.
+            Если категория не строка;
+            Если длина превышает 50 символов.
         """
         if not isinstance(category, str):
             raise ValueError("Категория должна быть строкой")
@@ -99,19 +88,16 @@ class Logic:
             raise ValueError("Категория должна быть длиной до 50 символов")
 
         return category
-    
 
     def type_validation(self, t_type):
         """
         Проверяет корректность типа транзакции.
 
-        :param t_type: тип транзакции. Допустимые значения: ``"income"`` или ``"expense"``.
+        :param t_type: Тип транзакции
         :type t_type: str
-
-        :returns: тот же тип транзакции, если он корректен.
+        :returns: Тип транзакции
         :rtype: str
-
-        :raises ValueError: если ``t_type`` не равен ``"income"`` или ``"expense"``.
+        :raises ValueError: Если тип некорректен
         """
         if t_type not in ("income", "expense"):
             raise ValueError("Тип транзакции должен быть 'income' или 'expense'")
@@ -121,7 +107,7 @@ class Logic:
 
     def _update_balance(self):
         """
-        Пересчитывает текущий баланс на основе всех загруженных транзакций.
+        Пересчитывает текущий баланс.
 
         :returns: None
         :rtype: NoneType
@@ -131,16 +117,13 @@ class Logic:
 
     def _find_goal_row(self, goal_id):
         """
-        Ищет цель по её идентификатору среди всех сохранённых целей.
+        Ищет копилку по её идентификатору.
 
-        :param goal_id: идентификатор цели, которую требуется найти.
+        :param goal_id: Идентификатор цели
         :type goal_id: int
-
-        :returns: кортеж вида ``(id, name, target_amount, current_amount)``.
+        :returns: Кортеж цели
         :rtype: tuple
-
-        :raises ValueError:
-            если цель с указанным ``goal_id`` не найдена.
+        :raises ValueError: Если цель не найдена
         """
         goals = self.savings_db.get_goal()
         for row in goals:
@@ -148,103 +131,59 @@ class Logic:
                 return row
         raise ValueError(f"Цель с ID {goal_id} не найдена")
 
-    # ---------- работа с транзакциями ----------
+    # ---------- транзакции ----------
 
     def add_transaction(self, t_type, summ, category, date):
         """
-        Добавляет новую транзакцию в систему и сохраняет её в базе данных.
+        Добавляет новую транзакцию.
 
-        Метод универсален, через него проходят как доходы,
-        так и расходы. Перед добавлением выполняется полная валидация всех
-        переданных данных.
-
-        :param t_type: тип транзакции. Допустимые значения: ``"income"`` или ``"expense"``.
+        :param t_type: Тип транзакции
         :type t_type: str
-
-        :param summ: сумма транзакции. Может быть числом или строкой, но должна
-            представлять собой положительное число.
-        :type summ: float | int | str
-
-        :param category: категория транзакции (краткое текстовое описание).
+        :param summ: Сумма
+        :type summ: int or float or str
+        :param category: Категория
         :type category: str
-
-        :param date: дата транзакции в формате ``"dd.mm.yy"``.
+        :param date: Дата
         :type date: str
-
-        :returns: None
-        :rtype: NoneType
-
-        :raises ValueError:
-            если тип транзакции некорректен;
-            если сумма не является числом или меньше либо равна нулю;
-            если категория некорректна или превышает допустимую длину;
-            если дата имеет неправильный формат или не существует.
-
         """
         t_type = self.type_validation(t_type)
         summ = self.amount_validation(summ)
         category = self.category_validation(category)
         self.date_validation(date)
+
         self.db.add_transaction(summ, category, date, t_type)
         self.transactions.append((t_type, summ, category, date))
         self._update_balance()
 
     def add_income(self, summ, category, date):
-        """
-        Добавляет новую транзакцию типа ``income``.
-
-        :param summ: сумма дохода.
-        :type summ: float | int | str
-        :param category: категория дохода.
-        :type category: str
-        :param date: дата в формате ``"dd.mm.yy"``.
-        :type date: str
-        """
+        """Добавляет доход."""
         self.add_transaction("income", summ, category, date)
 
     def add_expenses(self, summ, category, date):
-        """
-        Добавляет новую транзакцию типа ``expense``.
-
-        :param summ: сумма расхода.
-        :type summ: float | int | str
-        :param category: категория расхода.
-        :type category: str
-        :param date: дата в формате ``"dd.mm.yy"``.
-        :type date: str
-        """
+        """Добавляет расход."""
         self.add_transaction("expense", summ, category, date)
 
     def load_transactions(self):
         """
-        Загружает все транзакции из базы данных в память.
-
-        Метод получает список строк из таблицы ``transactions`` и пересобирает
-        атрибут ``self.transactions`` в список кортежей вида:
-        ``(type, amount, category, date)``.
+        Загружает все транзакции из базы данных.
 
         :returns: None
         :rtype: NoneType
-
-        :raises Exception: ошибки, возникающие при обращении к базе данных.
         """
-        all_rows = self.db.get_all_transactions()
+        rows = self.db.get_all_transactions()
         self.transactions = []
 
-        for row in all_rows:
-            id_, amount, category, date, t_type = row
-            self.transactions.append((t_type, amount, category, date))
+        for row in rows:
+            _, amount, category, date, t_type = row
+            self.transactions.append((t_type, float(amount), category, date))
+
 
     def summarize_transactions(self):
         """
-        Подсчитывает суммарный доход, расход и текущий баланс на основе
-        всех загруженных транзакций.
+        Подсчитывает доходы, расходы и баланс.
 
-        :returns: кортеж из трёх чисел:
-            - ``income`` — общая сумма доходов;
-            - ``expense`` — общая сумма расходов;
-            - ``balance`` — разница между доходами и расходами.
-        :rtype: tuple[float, float, float]
+        :returns: income, expense, balance
+        :rtype: tuple
         """
         income = 0
         expense = 0
@@ -259,26 +198,18 @@ class Logic:
 
     def get_expenses_by_category(self):
         """
-        Группирует расходы по категориям и подсчитывает итоговые суммы.
+        Группирует расходы по категориям.
 
-        Метод перебирает все транзакции в ``self.transactions`` и выбирает только
-        те, у которых тип равен ``"expense"``. Для каждой категории вычисляется
-        суммарный расход.
-
-        :returns:
-            - словарь формата ``{category: total_expense}``, если расходы найдены;
-            - строку ``"Расходов нет"``, если расходов нет вовсе.
-        :rtype: dict[str, float] | str
+        :returns: Словарь или строка
+        :rtype: dict or str
         """
-
-
         result = {}
-        for t_type, amount, category, date in self.transactions:
+
+        for t_type, amount, category, _ in self.transactions:
             if t_type != "expense":
                 continue
-            if category not in result:
-                result[category] = 0.0
-            result[category] += amount
+
+            result[category] = result.get(category, 0.0) + amount
 
         if not result:
             return "Расходов нет"
@@ -287,18 +218,11 @@ class Logic:
 
     def get_balance_by_date(self):
         """
-        Строит историю изменения баланса по датам.
+        Строит историю баланса по датам.
 
-        Метод агрегирует все транзакции по датам, вычисляет ежедневный
-        доход/убыль и формирует список накопленного баланса в
-        хронологическом порядке.
-
-        :returns:
-            - список кортежей ``(date, balance)`` — баланс на каждую дату;
-            - строку ``"Нет данных"``, если транзакций нет.
-        :rtype: list[tuple[str, float]] | str
+        :returns: Список (date, balance) или строка
+        :rtype: list or str
         """
-            
         daily = {}
 
         for t_type, amount, _, date in self.transactions:
@@ -313,7 +237,10 @@ class Logic:
         if not daily:
             return "Нет данных"
 
-        dates = sorted(daily.keys())
+        dates = sorted(
+            daily.keys(),
+            key=lambda d: datetime.strptime(d, "%d.%m.%y")
+        )
 
         result = []
         balance = 0.0
@@ -324,22 +251,19 @@ class Logic:
 
         return result
 
+
     def translate_type(self, t_type):
         """
-        Преобразует внутренний тип транзакции в человекочитаемый формат.
+        Переводит тип транзакции на русский язык.
 
         :param t_type: тип транзакции (``"income"`` или ``"expense"``).
         :type t_type: str
-
-        :returns:
-            - ``"Доход"``, если тип равен ``"income"``;
-            - ``"Расход"``, если тип равен ``"expense"``;
-            - исходное значение ``t_type`` во всех остальных случаях.
+        :returns: строковое представление типа.
         :rtype: str
-        """
+    """
         if t_type == "income":
             return "Доход"
-        elif t_type == "expense":
+        if t_type == "expense":
             return "Расход"
         return t_type
 
@@ -347,45 +271,25 @@ class Logic:
         """
         Удаляет транзакцию по её идентификатору.
 
-        Метод передаёт указанный ``trans_id`` в объект базы данных и пытается
-        удалить соответствующую запись. Если база данных сообщает об ошибке
-        (например, транзакции с таким идентификатором нет), генерируется
-        ``ValueError``. После успешного удаления метод обновляет локальный список
-        транзакций и пересчитывает текущий баланс.
+        Это алиас метода :meth:`delete_transaction_by_id`.
 
         :param trans_id: идентификатор транзакции.
         :type trans_id: int
-
         :returns: None
         :rtype: NoneType
-
-        :raises ValueError: если транзакция с указанным идентификатором не найдена.
         """
-        # пробуем удалить в базе
-        try:
-            self.db.delete_transaction(trans_id)
-        except Exception:
-            raise ValueError(f"Транзакция с id {trans_id} не найдена")
+        return self.delete_transaction_by_id(trans_id)
 
-        # перезагружаем список
-        self.load_transactions()
 
-        # пересчёт баланса
-        self._update_balance()
-        
-    # ---------- цели (накопления) ----------
+    # ---------- копилки ----------
 
     def calculate_progress(self, goal):
         """
-        Вычисляет процент выполнения указанной цели.
+        Вычисляет процент выполнения цели.
 
-        Процент рассчитывается как ``(current_amount / target_amount) * 100``.
-        Итоговое значение ограничено сверху значением ``100.0``.
-
-        :param goal: кортеж вида ``(id, name, target_amount, current_amount)``.
+        :param goal: Кортеж цели
         :type goal: tuple
-
-        :returns: процент выполнения цели в диапазоне от ``0.0`` до ``100.0``.
+        :returns: Процент выполнения
         :rtype: float
         """
         _, _, target_amount, current_amount = goal
@@ -393,23 +297,19 @@ class Logic:
         if target_amount <= 0:
             return 0.0
 
-        progress = (current_amount / target_amount) * 100
-        # На всякий случай не даём вылезти за 100%
-        return min(progress, 100.0)
+        return min((current_amount / target_amount) * 100, 100.0)
 
     def deposit_to_goal(self, goal_id, amount):
         """
-        Переводит указанную сумму из общего баланса в цель (копилку).
+        Переводит указанную сумму в выбранную копилку.
 
-        Сначала сумма проходит проверку через ``amount_validation``. Затем метод
-        находит цель по идентификатору, увеличивает её текущее накопление и
-        записывает расход в таблицу транзакций с текущей датой.
+        Метод уменьшает общий баланс, увеличивает накопление цели
+        и записывает операцию как расход с текущей датой.
 
         :param goal_id: идентификатор цели, в которую вносятся средства.
         :type goal_id: int
-        :param amount: сумма пополнения. Должна корректно преобразовываться
-            в положительное число.
-        :type amount: float | int | str
+        :param amount: сумма пополнения копилки.
+        :type amount: int | float | str
 
         :returns: None
         :rtype: NoneType
@@ -418,40 +318,29 @@ class Logic:
             если сумма некорректна;
             если цель с указанным ``goal_id`` не найдена.
         """
+
         amount = self.amount_validation(amount)
-
-        # находим цель
         goal = self._find_goal_row(goal_id)
-        id_, name, target_amount, current_amount = goal
 
-        # обновляем накопление в таблице savings
+        id_, name, target_amount, current_amount = goal
         new_current = current_amount + amount
+
         self.savings_db.update_goal_amount(id_, name, target_amount, new_current)
 
-        # пишем расход в обычную таблицу transactions
         today = datetime.now().strftime("%d.%m.%y")
-        category = f"Копилка: {name[:35]}"  
-        self.add_expenses(amount, category, today)
-        # баланс пересчитается внутри add_expenses
-
-        
+        self.add_expenses(amount, f"Копилка: {name[:35]}", today)
 
     def withdraw_from_goal(self, goal_id, amount):
         """
-        Извлекает указанную сумму из цели (копилки) и добавляет её
-        в общий баланс как доход.
+        Извлекает указанную сумму из копилки и добавляет её в общий баланс.
 
-        Сначала сумма проходит проверку через ``amount_validation``.
-        Затем метод находит цель по идентификатору и проверяет, достаточно ли
-        в ней средств. Если средств достаточно, накопление уменьшается, а в
-        таблицу транзакций добавляется доходная запись с текущей датой.
+        Метод уменьшает накопление цели и записывает операцию
+        как доход с текущей датой.
 
-        :param goal_id: идентификатор цели, из которой выводятся средства.
+        :param goal_id: идентификатор цели, из которой извлекаются средства.
         :type goal_id: int
-
-        :param amount: сумма вывода. Должна корректно преобразовываться
-            в положительное число.
-        :type amount: float | int | str
+        :param amount: сумма вывода из копилки.
+        :type amount: int | float | str
 
         :returns: None
         :rtype: NoneType
@@ -459,11 +348,11 @@ class Logic:
         :raises ValueError:
             если сумма некорректна;
             если цель с указанным ``goal_id`` не найдена;
-            если доступных накоплений меньше требуемой суммы.
+            если в копилке недостаточно средств.
         """
         amount = self.amount_validation(amount)
-
         goal = self._find_goal_row(goal_id)
+
         id_, name, target_amount, current_amount = goal
 
         if current_amount < amount:
@@ -471,12 +360,245 @@ class Logic:
                 f"В цели '{name}' недостаточно средств (сейчас {current_amount})"
             )
 
-        # уменьшаем накопление
         new_current = current_amount - amount
         self.savings_db.update_goal_amount(id_, name, target_amount, new_current)
 
-        # закидываем доход на счёт
         today = datetime.now().strftime("%d.%m.%y")
-        category = f"Из копилки: {name[:36]}"
-        self.add_income(amount, category, today)
+        self.add_income(amount, f"Из копилки: {name[:36]}", today)
 
+    # ---------- фильтрация ----------
+
+    def filter_transactions_by_date_range(self, start_date, end_date):
+        """
+        Фильтрует транзакции по заданному диапазону дат (включительно).
+
+        Метод возвращает только те транзакции, дата которых
+        находится между ``start_date`` и ``end_date``.
+
+        :param start_date: дата начала диапазона в формате ``"dd.mm.yy"``.
+        :type start_date: str
+        :param end_date: дата конца диапазона в формате ``"dd.mm.yy"``.
+        :type end_date: str
+
+        :returns: список транзакций вида ``(type, amount, category, date)``.
+        :rtype: list[tuple[str, float, str, str]]
+        """
+
+        try:
+            start = datetime.strptime(start_date, "%d.%m.%y")
+            end = datetime.strptime(end_date, "%d.%m.%y")
+        except ValueError:
+            return []
+
+        result = []
+
+        for t_type, amount, category, date in self.transactions:
+            try:
+                current = datetime.strptime(date, "%d.%m.%y")
+                if start <= current <= end:
+                    result.append((t_type, amount, category, date))
+            except ValueError:
+                continue
+
+        return result
+
+    def summarize_transactions_by_range(self, start_date, end_date):
+        """
+        Подсчитывает доходы, расходы и баланс за указанный период.
+
+        :param start_date: дата начала периода в формате ``"dd.mm.yy"``.
+        :type start_date: str
+        :param end_date: дата конца периода в формате ``"dd.mm.yy"``.
+        :type end_date: str
+
+        :returns: кортеж ``(income, expense, balance)`` за период.
+        :rtype: tuple[float, float, float]
+        """
+
+        filtered = self.filter_transactions_by_date_range(start_date, end_date)
+
+        income = 0
+        expense = 0
+
+        for t_type, amount, _, _ in filtered:
+            if t_type == "income":
+                income += amount
+            else:
+                expense += amount
+
+        return income, expense, income - expense
+
+    def get_balance_by_date_range(self, start_date, end_date):
+        """
+        Строит историю изменения накопленного баланса за период.
+
+        Баланс считается последовательно по датам
+        в хронологическом порядке.
+
+        :param start_date: дата начала периода в формате ``"dd.mm.yy"``.
+        :type start_date: str
+        :param end_date: дата конца периода в формате ``"dd.mm.yy"``.
+        :type end_date: str
+
+        :returns:
+            список кортежей ``(date, balance)``;
+            либо строку ``"Нет данных"``, если транзакций нет.
+        :rtype: list[tuple[str, float]] | str
+        """
+        filtered = self.filter_transactions_by_date_range(start_date, end_date)
+
+        daily = {}
+
+        for t_type, amount, _, date in filtered:
+            daily.setdefault(date, 0.0)
+            daily[date] += amount if t_type == "income" else -amount
+
+        if not daily:
+            return "Нет данных"
+
+        result = []
+        balance = 0.0
+
+        dates = sorted(daily.keys(), key=lambda d: datetime.strptime(d, "%d.%m.%y"))
+
+        for d in dates:
+            balance += daily[d]
+            result.append((d, balance))
+
+        return result
+
+    def get_expenses_by_category_range(self, start_date, end_date):
+        """
+        Группирует расходы по категориям за указанный период.
+
+        :param start_date: дата начала периода в формате ``"dd.mm.yy"``.
+        :type start_date: str
+        :param end_date: дата конца периода в формате ``"dd.mm.yy"``.
+        :type end_date: str
+
+        :returns:
+            словарь формата ``{category: total_expense}``;
+            либо строку ``"Расходов нет"``, если расходов нет.
+        :rtype: dict[str, float] | str
+        """
+
+        filtered = self.filter_transactions_by_date_range(start_date, end_date)
+        result = {}
+
+        for t_type, amount, category, _ in filtered:
+            if t_type == "expense":
+                result[category] = result.get(category, 0.0) + amount
+
+        if not result:
+            return "Расходов нет"
+
+        return result
+
+    def get_transaction_by_id(self, transaction_id):
+        """
+        Возвращает транзакцию по её идентификатору.
+
+        :param transaction_id: идентификатор транзакции.
+        :type transaction_id: int
+
+        :returns: строку транзакции из базы данных или ``None``.
+        :rtype: tuple | None
+        """
+        try:
+            return self.db.get_transaction(transaction_id)
+        except Exception:
+            return None
+
+    def delete_transaction_by_id(self, transaction_id):
+        """
+        Удаляет транзакцию по её идентификатору.
+
+        После удаления обновляет список транзакций
+        и пересчитывает баланс.
+
+        :param transaction_id: идентификатор транзакции.
+        :type transaction_id: int
+
+        :returns: None
+        :rtype: NoneType
+
+        :raises ValueError: если произошла ошибка при удалении транзакции.
+        """
+        try:
+            self.db.delete_transaction(transaction_id)
+            self.load_transactions()
+            self._update_balance()
+        except Exception as e:
+            raise ValueError(f"Ошибка удаления транзакции: {e}")
+
+    def edit_transaction(self, transaction_id, t_type, summ, category, date):
+        """
+        Редактирует существующую транзакцию.
+
+        Перед обновлением выполняется валидация
+        типа, суммы, категории и даты.
+
+        :param transaction_id: идентификатор транзакции.
+        :type transaction_id: int
+        :param t_type: тип транзакции (``"income"`` или ``"expense"``).
+        :type t_type: str
+        :param summ: сумма транзакции.
+        :type summ: int | float | str
+        :param category: категория транзакции.
+        :type category: str
+        :param date: дата транзакции в формате ``"dd.mm.yy"``.
+        :type date: str
+
+        :returns: None
+        :rtype: NoneType
+
+        :raises ValueError: если редактирование завершилось ошибкой.
+        """
+        try:
+            t_type = self.type_validation(t_type)
+            summ = self.amount_validation(summ)
+            category = self.category_validation(category)
+            self.date_validation(date)
+
+            self.db.update_transaction(transaction_id, summ, category, date, t_type)
+            self.load_transactions()
+            self._update_balance()
+        except Exception as e:
+            raise ValueError(f"Ошибка редактирования: {e}")
+
+    def update_goal_info(self, goal_id, new_name, new_target, current_amount):
+        """
+        Обновляет название, целевую сумму и текущее накопление копилки.
+
+        :param goal_id: идентификатор цели.
+        :type goal_id: int
+        :param new_name: новое название цели.
+        :type new_name: str
+        :param new_target: новая целевая сумма.
+        :type new_target: float
+        :param current_amount: текущее накопление.
+        :type current_amount: float
+
+        :returns: None
+        :rtype: NoneType
+        """
+        self.savings_db.update_goal_amount(goal_id, new_name, new_target, current_amount)
+
+
+    def delete_goal_with_transactions(self, goal_id):
+        """
+        Удаляет копилку по её идентификатору.
+
+        :param goal_id: идентификатор цели.
+        :type goal_id: int
+
+        :returns: None
+        :rtype: NoneType
+
+        :raises ValueError: если произошла ошибка при удалении копилки.
+        """
+
+        try:
+            self.savings_db.delete_goal(goal_id)
+        except Exception as e:
+            raise ValueError(f"Ошибка удаления копилки: {e}")
