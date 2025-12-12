@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>database.DataBase</title>
+    <meta name="generator" content="pydoctor 25.10.1"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+    
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          database/logic/main <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="database.DataBase.html" class="internal-link" title="This class"><wbr></wbr>Data<wbr></wbr>Base</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="database.DataBase.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#add_transaction" class="internal-link" title="database.DataBase.add_transaction">add<wbr></wbr>_transaction</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#create_db" class="internal-link" title="database.DataBase.create_db">create<wbr></wbr>_db</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#delete_transaction" class="internal-link" title="database.DataBase.delete_transaction">delete<wbr></wbr>_transaction</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_all_transactions" class="internal-link" title="database.DataBase.get_all_transactions">get<wbr></wbr>_all<wbr></wbr>_transactions</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_transaction" class="internal-link" title="database.DataBase.get_transaction">get<wbr></wbr>_transaction</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#update_transaction" class="internal-link" title="database.DataBase.update_transaction">update<wbr></wbr>_transaction</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#path" class="internal-link" title="database.DataBase.path">path</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="database.html" class="internal-link" title="The parent of this class">database</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="database.DataBase.html" class="internal-link" title="database.DataBase"><wbr></wbr>Data<wbr></wbr>Base</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="database.DataBaseForSavings.html" class="internal-link" title="database.DataBaseForSavings"><wbr></wbr>Data<wbr></wbr>Base<wbr></wbr>For<wbr></wbr>Savings</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        
+         
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        </div>
+        <div id="collapse-sidebar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
+      </div>
+
+      <main class="">
+        
+
+        
+
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="database.html" class="internal-link">database</a></code><wbr></wbr>.<code><a href="database.DataBase.html" class="internal-link" title="database.DataBase">DataBase</a></code></code></h1>
+          <div id="show-private">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">DataBase</span>:</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="database.DataBase.__init__">DataBase(path)</a></code></p><p><a href="classIndex.html#database.DataBase">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>Класс для работы с базой данных SQLite, содержащий таблицу transactions
+path: str путь к файлу базы данных SQLite</p></div>
+        </div>
+
+        <div id="split-tables">
+          <table class="children sortable" id="id9">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__" class="internal-link" title="database.DataBase.__init__">__init__</a></code></td>
+    <td>Конструктор класса path: str путь к файлу базы данных SQLite</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#add_transaction" class="internal-link" title="database.DataBase.add_transaction">add<wbr></wbr>_transaction</a></code></td>
+    <td>Добавляет новую запись в таблицу transactions</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#create_db" class="internal-link" title="database.DataBase.create_db">create<wbr></wbr>_db</a></code></td>
+    <td>Метод, отвечающий за создание таблицы transactions, при условии: что она еще не создана</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#delete_transaction" class="internal-link" title="database.DataBase.delete_transaction">delete<wbr></wbr>_transaction</a></code></td>
+    <td>Удаляет транзакцию по её ID</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_all_transactions" class="internal-link" title="database.DataBase.get_all_transactions">get<wbr></wbr>_all<wbr></wbr>_transactions</a></code></td>
+    <td>Возвращает список всех транзакций(список кортежей, кортеж - строка таблицы) из таблицы transactions</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_transaction" class="internal-link" title="database.DataBase.get_transaction">get<wbr></wbr>_transaction</a></code></td>
+    <td>Возвращает одну транзакцию по ее ID (кортеж со значениями полей одной транзакции или None, если запись не найдена)</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#update_transaction" class="internal-link" title="database.DataBase.update_transaction">update<wbr></wbr>_transaction</a></code></td>
+    <td>Обновляет существующую транзакцию</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#path" class="internal-link" title="database.DataBase.path">path</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="child-list">
+          <div class="basemethod">
+  
+  
+  <a name="database.DataBase.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">path</span>):</span>
+    
+    <a class="headerLink" href="#__init__" title="database.DataBase.__init__">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Конструктор класса
+path: str путь к файлу базы данных SQLite</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="database.DataBase.add_transaction">
+    
+  </a>
+  <a name="add_transaction">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">add_transaction</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">amount, </span><span class="rst-sig-param">category, </span><span class="rst-sig-param">date, </span><span class="rst-sig-param">type_</span>):</span>
+    
+    <a class="headerLink" href="#add_transaction" title="database.DataBase.add_transaction">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Добавляет новую запись в таблицу transactions</p>
+<p>amount: float сумма транзакции
+category: str категория, например, "food", "transport"
+date: str дата в формате DD.MM.YYYY
+type: str тип транзакции "доход", "расход"</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="database.DataBase.create_db">
+    
+  </a>
+  <a name="create_db">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">create_db</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#create_db" title="database.DataBase.create_db">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Метод, отвечающий за создание таблицы transactions, при условии: что она еще не создана</p>
+<p>В таблице есть поля:
+id: INTEGER PRIMARY KEY, AUTOINCREMENT,
+amount: REAL,
+category: TEXT,
+date: TEXT,
+type: TEXT</p>
+<p>Метод автоматически открывает и закрывает соединение</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="database.DataBase.delete_transaction">
+    
+  </a>
+  <a name="delete_transaction">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">delete_transaction</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">id</span>):</span>
+    
+    <a class="headerLink" href="#delete_transaction" title="database.DataBase.delete_transaction">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Удаляет транзакцию по её ID</p>
+<p>id : int идентификатор записи, которую нужно удалить</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="database.DataBase.get_all_transactions">
+    
+  </a>
+  <a name="get_all_transactions">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">get_all_transactions</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#get_all_transactions" title="database.DataBase.get_all_transactions">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Возвращает список всех транзакций(список кортежей, кортеж - строка таблицы) из таблицы transactions</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="database.DataBase.get_transaction">
+    
+  </a>
+  <a name="get_transaction">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">get_transaction</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">id</span>):</span>
+    
+    <a class="headerLink" href="#get_transaction" title="database.DataBase.get_transaction">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Возвращает одну транзакцию по ее ID (кортеж со значениями полей одной транзакции или None, если запись не найдена)</p>
+<p>id : int идентификатор записи</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="database.DataBase.update_transaction">
+    
+  </a>
+  <a name="update_transaction">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">update_transaction</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">id, </span><span class="rst-sig-param">amount, </span><span class="rst-sig-param">category, </span><span class="rst-sig-param">date, </span><span class="rst-sig-param">type_</span>):</span>
+    
+    <a class="headerLink" href="#update_transaction" title="database.DataBase.update_transaction">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Обновляет существующую транзакцию</p>
+<p>id : int идентификатор записи, которую нужно обновить
+amount : float новая сумма транзакции
+category : str новая категория
+date : str новая дата в формате DD.MM.YYYY
+type_ : str новый тип транзакции "доход", "расход"</p>
+</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="database.DataBase.path">
+    
+  </a>
+  <a name="path">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">path</span> =
+    
+    <a class="headerLink" href="#path" title="database.DataBase.path">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div>
+        </div>
+      
+      </main>
+    </div>
+
+    <footer class="navbar navbar-default">
+
+  
+  <div class="container-fluid">
+    <a href="index.html">API Documentation</a> for database/logic/main,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    25.10.1 at 2025-12-13 02:55:42.
+  </div>
+
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

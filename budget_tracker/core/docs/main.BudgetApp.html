@@ -1,0 +1,1920 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>main.BudgetApp</title>
+    <meta name="generator" content="pydoctor 25.10.1"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+    
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          database/logic/main <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="main.BudgetApp.html" class="internal-link" title="This class"><wbr></wbr>Budget<wbr></wbr>App</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="main.BudgetApp.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_info" class="internal-link" title="main.BudgetApp.get_info">get<wbr></wbr>_info</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_statistics" class="internal-link" title="main.BudgetApp.get_statistics">get<wbr></wbr>_statistics</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#graph" class="internal-link" title="main.BudgetApp.graph">graph</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#pie_chart" class="internal-link" title="main.BudgetApp.pie_chart">pie<wbr></wbr>_chart</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_add_goal" class="internal-link" title="main.BudgetApp._add_goal">_add<wbr></wbr>_goal</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_apply_date_filter" class="internal-link" title="main.BudgetApp._apply_date_filter">_apply<wbr></wbr>_date<wbr></wbr>_filter</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_apply_styles" class="internal-link" title="main.BudgetApp._apply_styles">_apply<wbr></wbr>_styles</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_create_widgets" class="internal-link" title="main.BudgetApp._create_widgets">_create<wbr></wbr>_widgets</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_delete_goal" class="internal-link" title="main.BudgetApp._delete_goal">_delete<wbr></wbr>_goal</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_deposit_money" class="internal-link" title="main.BudgetApp._deposit_money">_deposit<wbr></wbr>_money</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_edit_goal" class="internal-link" title="main.BudgetApp._edit_goal">_edit<wbr></wbr>_goal</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_get_selected_transaction_id" class="internal-link" title="main.BudgetApp._get_selected_transaction_id">_get<wbr></wbr>_selected<wbr></wbr>_transaction<wbr></wbr>_id</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_load_transactions_to_table" class="internal-link" title="main.BudgetApp._load_transactions_to_table">_load<wbr></wbr>_transactions<wbr></wbr>_to<wbr></wbr>_table</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_on_add" class="internal-link" title="main.BudgetApp._on_add">_on<wbr></wbr>_add</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_on_delete" class="internal-link" title="main.BudgetApp._on_delete">_on<wbr></wbr>_delete</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_on_edit" class="internal-link" title="main.BudgetApp._on_edit">_on<wbr></wbr>_edit</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_on_refresh" class="internal-link" title="main.BudgetApp._on_refresh">_on<wbr></wbr>_refresh</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_on_show_stats" class="internal-link" title="main.BudgetApp._on_show_stats">_on<wbr></wbr>_show<wbr></wbr>_stats</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_refresh_savings" class="internal-link" title="main.BudgetApp._refresh_savings">_refresh<wbr></wbr>_savings</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_reset_date_filter" class="internal-link" title="main.BudgetApp._reset_date_filter">_reset<wbr></wbr>_date<wbr></wbr>_filter</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_set_default_date_filter" class="internal-link" title="main.BudgetApp._set_default_date_filter">_set<wbr></wbr>_default<wbr></wbr>_date<wbr></wbr>_filter</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_show_context_menu" class="internal-link" title="main.BudgetApp._show_context_menu">_show<wbr></wbr>_context<wbr></wbr>_menu</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_withdraw_money" class="internal-link" title="main.BudgetApp._withdraw_money">_withdraw<wbr></wbr>_money</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#amount_var" class="internal-link" title="main.BudgetApp.amount_var">amount<wbr></wbr>_var</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#category_var" class="internal-link" title="main.BudgetApp.category_var">category<wbr></wbr>_var</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#context_menu" class="internal-link" title="main.BudgetApp.context_menu">context<wbr></wbr>_menu</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#current_transaction_ids" class="internal-link" title="main.BudgetApp.current_transaction_ids">current<wbr></wbr>_transaction<wbr></wbr>_ids</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#date_filter_end" class="internal-link" title="main.BudgetApp.date_filter_end">date<wbr></wbr>_filter<wbr></wbr>_end</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#date_filter_start" class="internal-link" title="main.BudgetApp.date_filter_start">date<wbr></wbr>_filter<wbr></wbr>_start</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#date_var" class="internal-link" title="main.BudgetApp.date_var">date<wbr></wbr>_var</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#filter_end_var" class="internal-link" title="main.BudgetApp.filter_end_var">filter<wbr></wbr>_end<wbr></wbr>_var</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#filter_start_var" class="internal-link" title="main.BudgetApp.filter_start_var">filter<wbr></wbr>_start<wbr></wbr>_var</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#filtered_transactions" class="internal-link" title="main.BudgetApp.filtered_transactions">filtered<wbr></wbr>_transactions</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#logic" class="internal-link" title="main.BudgetApp.logic">logic</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#savings_tree" class="internal-link" title="main.BudgetApp.savings_tree">savings<wbr></wbr>_tree</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#status_label" class="internal-link" title="main.BudgetApp.status_label">status<wbr></wbr>_label</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#status_var" class="internal-link" title="main.BudgetApp.status_var">status<wbr></wbr>_var</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#tree" class="internal-link" title="main.BudgetApp.tree">tree</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#type_var" class="internal-link" title="main.BudgetApp.type_var">type<wbr></wbr>_var</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="main.html" class="internal-link" title="The parent of this class">main</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="main.AddGoalDialog.html" class="internal-link" title="main.AddGoalDialog"><wbr></wbr>Add<wbr></wbr>Goal<wbr></wbr>Dialog</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="main.BudgetApp.html" class="internal-link" title="main.BudgetApp"><wbr></wbr>Budget<wbr></wbr>App</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="main.EditGoalDialog.html" class="internal-link" title="main.EditGoalDialog"><wbr></wbr>Edit<wbr></wbr>Goal<wbr></wbr>Dialog</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="main.EditTransactionDialog.html" class="internal-link" title="main.EditTransactionDialog"><wbr></wbr>Edit<wbr></wbr>Transaction<wbr></wbr>Dialog</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        
+         
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        </div>
+        <div id="collapse-sidebar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
+      </div>
+
+      <main class="">
+        
+
+        
+
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="main.html" class="internal-link">main</a></code><wbr></wbr>.<code><a href="main.BudgetApp.html" class="internal-link" title="main.BudgetApp">BudgetApp</a></code></code></h1>
+          <div id="show-private">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">BudgetApp</span>(tk.Tk):</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="main.BudgetApp.__init__">BudgetApp()</a></code></p><p><a href="classIndex.html#main.BudgetApp">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>Главное окно приложения Бюджет-трекер.</p>
+<p>Наследуется от tk.Tk и представляет собой основное окно приложения
+с двухколоночным интерфейсом: транзакции слева, копилки справа.</p>
+</div>
+        </div>
+
+        <div id="split-tables">
+          <table class="children sortable" id="id2">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__" class="internal-link" title="main.BudgetApp.__init__">__init__</a></code></td>
+    <td>Инициализирует главное окно приложения.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_info" class="internal-link" title="main.BudgetApp.get_info">get<wbr></wbr>_info</a></code></td>
+    <td>Отображает график изменения баланса с учетом фильтра дат.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_statistics" class="internal-link" title="main.BudgetApp.get_statistics">get<wbr></wbr>_statistics</a></code></td>
+    <td>Отображает круговую диаграмму расходов с учетом фильтра дат.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#graph" class="internal-link" title="main.BudgetApp.graph">graph</a></code></td>
+    <td>Отображает линейный график изменения баланса по датам.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#pie_chart" class="internal-link" title="main.BudgetApp.pie_chart">pie<wbr></wbr>_chart</a></code></td>
+    <td>Отображает круговую диаграмму расходов по категориям.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#amount_var" class="internal-link" title="main.BudgetApp.amount_var">amount<wbr></wbr>_var</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#category_var" class="internal-link" title="main.BudgetApp.category_var">category<wbr></wbr>_var</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#context_menu" class="internal-link" title="main.BudgetApp.context_menu">context<wbr></wbr>_menu</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#current_transaction_ids" class="internal-link" title="main.BudgetApp.current_transaction_ids">current<wbr></wbr>_transaction<wbr></wbr>_ids</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#date_filter_end" class="internal-link" title="main.BudgetApp.date_filter_end">date<wbr></wbr>_filter<wbr></wbr>_end</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#date_filter_start" class="internal-link" title="main.BudgetApp.date_filter_start">date<wbr></wbr>_filter<wbr></wbr>_start</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#date_var" class="internal-link" title="main.BudgetApp.date_var">date<wbr></wbr>_var</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#filter_end_var" class="internal-link" title="main.BudgetApp.filter_end_var">filter<wbr></wbr>_end<wbr></wbr>_var</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#filter_start_var" class="internal-link" title="main.BudgetApp.filter_start_var">filter<wbr></wbr>_start<wbr></wbr>_var</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#filtered_transactions" class="internal-link" title="main.BudgetApp.filtered_transactions">filtered<wbr></wbr>_transactions</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#logic" class="internal-link" title="main.BudgetApp.logic">logic</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#savings_tree" class="internal-link" title="main.BudgetApp.savings_tree">savings<wbr></wbr>_tree</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#status_label" class="internal-link" title="main.BudgetApp.status_label">status<wbr></wbr>_label</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#status_var" class="internal-link" title="main.BudgetApp.status_var">status<wbr></wbr>_var</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#tree" class="internal-link" title="main.BudgetApp.tree">tree</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#type_var" class="internal-link" title="main.BudgetApp.type_var">type<wbr></wbr>_var</a></code></td>
+    <td><span class="rst-undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_add_goal" class="internal-link" title="main.BudgetApp._add_goal">_add<wbr></wbr>_goal</a></code></td>
+    <td>Открывает диалог создания новой копилки.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_apply_date_filter" class="internal-link" title="main.BudgetApp._apply_date_filter">_apply<wbr></wbr>_date<wbr></wbr>_filter</a></code></td>
+    <td>Применяет фильтр по датам к таблице транзакций.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_apply_styles" class="internal-link" title="main.BudgetApp._apply_styles">_apply<wbr></wbr>_styles</a></code></td>
+    <td>Применяет стили оформления для элементов интерфейса.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_create_widgets" class="internal-link" title="main.BudgetApp._create_widgets">_create<wbr></wbr>_widgets</a></code></td>
+    <td>Создает все элементы интерфейса.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_delete_goal" class="internal-link" title="main.BudgetApp._delete_goal">_delete<wbr></wbr>_goal</a></code></td>
+    <td>Удаляет выбранную копилку после подтверждения.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_deposit_money" class="internal-link" title="main.BudgetApp._deposit_money">_deposit<wbr></wbr>_money</a></code></td>
+    <td>Вносит деньги в выбранную копилку.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_edit_goal" class="internal-link" title="main.BudgetApp._edit_goal">_edit<wbr></wbr>_goal</a></code></td>
+    <td>Открывает диалог редактирования выбранной копилки.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_get_selected_transaction_id" class="internal-link" title="main.BudgetApp._get_selected_transaction_id">_get<wbr></wbr>_selected<wbr></wbr>_transaction<wbr></wbr>_id</a></code></td>
+    <td>Получает реальный ID выбранной транзакции из базы данных.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_load_transactions_to_table" class="internal-link" title="main.BudgetApp._load_transactions_to_table">_load<wbr></wbr>_transactions<wbr></wbr>_to<wbr></wbr>_table</a></code></td>
+    <td>Загружает транзакции в таблицу с учетом фильтра и цветового кодирования.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_on_add" class="internal-link" title="main.BudgetApp._on_add">_on<wbr></wbr>_add</a></code></td>
+    <td>Обработчик добавления новой транзакции.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_on_delete" class="internal-link" title="main.BudgetApp._on_delete">_on<wbr></wbr>_delete</a></code></td>
+    <td>Обработчик удаления транзакции.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_on_edit" class="internal-link" title="main.BudgetApp._on_edit">_on<wbr></wbr>_edit</a></code></td>
+    <td>Обработчик редактирования транзакции.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_on_refresh" class="internal-link" title="main.BudgetApp._on_refresh">_on<wbr></wbr>_refresh</a></code></td>
+    <td>Обновляет список транзакций в таблице.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_on_show_stats" class="internal-link" title="main.BudgetApp._on_show_stats">_on<wbr></wbr>_show<wbr></wbr>_stats</a></code></td>
+    <td>Показывает окно со статистикой доходов, расходов и баланса.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_refresh_savings" class="internal-link" title="main.BudgetApp._refresh_savings">_refresh<wbr></wbr>_savings</a></code></td>
+    <td>Обновляет список копилок с цветовым кодированием прогресса.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_reset_date_filter" class="internal-link" title="main.BudgetApp._reset_date_filter">_reset<wbr></wbr>_date<wbr></wbr>_filter</a></code></td>
+    <td>Сбрасывает фильтр дат, показывая все транзакции.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_set_default_date_filter" class="internal-link" title="main.BudgetApp._set_default_date_filter">_set<wbr></wbr>_default<wbr></wbr>_date<wbr></wbr>_filter</a></code></td>
+    <td>Устанавливает фильтр дат по умолчанию на последние 30 дней.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_show_context_menu" class="internal-link" title="main.BudgetApp._show_context_menu">_show<wbr></wbr>_context<wbr></wbr>_menu</a></code></td>
+    <td>Отображает контекстное меню при клике правой кнопкой мыши.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_withdraw_money" class="internal-link" title="main.BudgetApp._withdraw_money">_withdraw<wbr></wbr>_money</a></code></td>
+    <td>Снимает деньги из выбранной копилки.</td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="child-list">
+          <div class="basemethod">
+  
+  
+  <a name="main.BudgetApp.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">__init__</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#__init__" title="main.BudgetApp.__init__">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Инициализирует главное окно приложения.</p>
+<p>Создает окно 1100x800, инициализирует бизнес-логику, применяет стили,
+создает виджеты интерфейса и загружает начальные данные.</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="main.BudgetApp.get_info">
+    
+  </a>
+  <a name="get_info">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">get_info</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#get_info" title="main.BudgetApp.get_info">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Отображает график изменения баланса с учетом фильтра дат.</p>
+<p>Если установлен фильтр - показывает баланс за период,
+иначе показывает весь график баланса.</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="main.BudgetApp.get_statistics">
+    
+  </a>
+  <a name="get_statistics">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">get_statistics</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#get_statistics" title="main.BudgetApp.get_statistics">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Отображает круговую диаграмму расходов с учетом фильтра дат.</p>
+<p>Если установлен фильтр - показывает расходы за период,
+иначе показывает все расходы.</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="main.BudgetApp.graph">
+    
+  </a>
+  <a name="graph">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">graph</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">dates_list, </span><span class="rst-sig-param">title=<span class="rst-variable-quote">'</span><span class="rst-variable-string">Баланс по дням</span><span class="rst-variable-quote">'</span></span>):</span>
+    
+    <a class="headerLink" href="#graph" title="main.BudgetApp.graph">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Отображает линейный график изменения баланса по датам.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dates<wbr></wbr>_list:</span>list or str</td><td class="fieldArgDesc">Список кортежей (дата, баланс) или строка "Нет данных"</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">title:</span>str</td><td class="fieldArgDesc">Заголовок графика</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="main.BudgetApp.pie_chart">
+    
+  </a>
+  <a name="pie_chart">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">pie_chart</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">categories_dict, </span><span class="rst-sig-param">title=<span class="rst-variable-quote">'</span><span class="rst-variable-string">Расходы по категориям</span><span class="rst-variable-quote">'</span></span>):</span>
+    
+    <a class="headerLink" href="#pie_chart" title="main.BudgetApp.pie_chart">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Отображает круговую диаграмму расходов по категориям.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">categories<wbr></wbr>_dict:</span>dict or str</td><td class="fieldArgDesc">Словарь {категория: сумма} или строка "Расходов нет"</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">title:</span>str</td><td class="fieldArgDesc">Заголовок диаграммы</td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.amount_var">
+    
+  </a>
+  <a name="amount_var">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">amount_var</span> =
+    
+    <a class="headerLink" href="#amount_var" title="main.BudgetApp.amount_var">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.category_var">
+    
+  </a>
+  <a name="category_var">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">category_var</span> =
+    
+    <a class="headerLink" href="#category_var" title="main.BudgetApp.category_var">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.context_menu">
+    
+  </a>
+  <a name="context_menu">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">context_menu</span> =
+    
+    <a class="headerLink" href="#context_menu" title="main.BudgetApp.context_menu">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.current_transaction_ids">
+    
+  </a>
+  <a name="current_transaction_ids">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">current_transaction_ids</span>: <code>dict</code> =
+    
+    <a class="headerLink" href="#current_transaction_ids" title="main.BudgetApp.current_transaction_ids">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.date_filter_end">
+    
+  </a>
+  <a name="date_filter_end">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">date_filter_end</span> =
+    
+    <a class="headerLink" href="#date_filter_end" title="main.BudgetApp.date_filter_end">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.date_filter_start">
+    
+  </a>
+  <a name="date_filter_start">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">date_filter_start</span> =
+    
+    <a class="headerLink" href="#date_filter_start" title="main.BudgetApp.date_filter_start">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.date_var">
+    
+  </a>
+  <a name="date_var">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">date_var</span> =
+    
+    <a class="headerLink" href="#date_var" title="main.BudgetApp.date_var">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.filter_end_var">
+    
+  </a>
+  <a name="filter_end_var">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">filter_end_var</span> =
+    
+    <a class="headerLink" href="#filter_end_var" title="main.BudgetApp.filter_end_var">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.filter_start_var">
+    
+  </a>
+  <a name="filter_start_var">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">filter_start_var</span> =
+    
+    <a class="headerLink" href="#filter_start_var" title="main.BudgetApp.filter_start_var">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.filtered_transactions">
+    
+  </a>
+  <a name="filtered_transactions">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">filtered_transactions</span>: <code>list</code> =
+    
+    <a class="headerLink" href="#filtered_transactions" title="main.BudgetApp.filtered_transactions">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.logic">
+    
+  </a>
+  <a name="logic">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">logic</span> =
+    
+    <a class="headerLink" href="#logic" title="main.BudgetApp.logic">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.savings_tree">
+    
+  </a>
+  <a name="savings_tree">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">savings_tree</span> =
+    
+    <a class="headerLink" href="#savings_tree" title="main.BudgetApp.savings_tree">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.status_label">
+    
+  </a>
+  <a name="status_label">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">status_label</span> =
+    
+    <a class="headerLink" href="#status_label" title="main.BudgetApp.status_label">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.status_var">
+    
+  </a>
+  <a name="status_var">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">status_var</span> =
+    
+    <a class="headerLink" href="#status_var" title="main.BudgetApp.status_var">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.tree">
+    
+  </a>
+  <a name="tree">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">tree</span> =
+    
+    <a class="headerLink" href="#tree" title="main.BudgetApp.tree">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="main.BudgetApp.type_var">
+    
+  </a>
+  <a name="type_var">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">type_var</span> =
+    
+    <a class="headerLink" href="#type_var" title="main.BudgetApp.type_var">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._add_goal">
+    
+  </a>
+  <a name="_add_goal">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_add_goal</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_add_goal" title="main.BudgetApp._add_goal">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Открывает диалог создания новой копилки.</p>
+<p>После подтверждения сохраняет копилку в БД с нулевым начальным балансом
+и обновляет список копилок.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._apply_date_filter">
+    
+  </a>
+  <a name="_apply_date_filter">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_apply_date_filter</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_apply_date_filter" title="main.BudgetApp._apply_date_filter">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Применяет фильтр по датам к таблице транзакций.</p>
+<p>Проверяет корректность формата дат, сохраняет значения фильтра
+и обновляет таблицу. Отображает сообщение об ошибке при некорректном вводе.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._apply_styles">
+    
+  </a>
+  <a name="_apply_styles">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_apply_styles</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_apply_styles" title="main.BudgetApp._apply_styles">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Применяет стили оформления для элементов интерфейса.</p>
+<p>Настраивает высоту строк и шрифты для таблиц Treeview.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._create_widgets">
+    
+  </a>
+  <a name="_create_widgets">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_create_widgets</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_create_widgets" title="main.BudgetApp._create_widgets">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Создает все элементы интерфейса.</p>
+<p>Строит двухколоночную компоновку:
+- Левая колонка: форма добавления, фильтр, таблица транзакций, кнопки
+- Правая колонка: таблица копилок, кнопки управления копилками</p>
+<p>Инициализирует все переменные Tkinter и привязывает обработчики событий.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._delete_goal">
+    
+  </a>
+  <a name="_delete_goal">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_delete_goal</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_delete_goal" title="main.BudgetApp._delete_goal">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Удаляет выбранную копилку после подтверждения.</p>
+<p>Если в копилке есть деньги, показывает предупреждение с текущим балансом.
+После подтверждения удаляет копилку из БД.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._deposit_money">
+    
+  </a>
+  <a name="_deposit_money">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_deposit_money</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_deposit_money" title="main.BudgetApp._deposit_money">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Вносит деньги в выбранную копилку.</p>
+<p>Запрашивает сумму пополнения через диалоговое окно.
+Сумма списывается из общего баланса как расход с категорией "Копилка: {название}".</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._edit_goal">
+    
+  </a>
+  <a name="_edit_goal">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_edit_goal</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_edit_goal" title="main.BudgetApp._edit_goal">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Открывает диалог редактирования выбранной копилки.</p>
+<p>Позволяет изменить название и целевую сумму. После подтверждения
+обновляет данные в БД и список копилок.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._get_selected_transaction_id">
+    
+  </a>
+  <a name="_get_selected_transaction_id">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_get_selected_transaction_id</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_get_selected_transaction_id" title="main.BudgetApp._get_selected_transaction_id">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Получает реальный ID выбранной транзакции из базы данных.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">int or None</td><td class="fieldArgDesc">ID транзакции в БД или None, если ничего не выбрано</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._load_transactions_to_table">
+    
+  </a>
+  <a name="_load_transactions_to_table">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_load_transactions_to_table</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_load_transactions_to_table" title="main.BudgetApp._load_transactions_to_table">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Загружает транзакции в таблицу с учетом фильтра и цветового кодирования.</p>
+<p>Очищает таблицу, загружает данные из БД, применяет фильтр по датам
+(если установлен), раскрашивает доходы зеленым, расходы красным.
+Сохраняет соответствие между ID элементов Treeview и ID в БД.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._on_add">
+    
+  </a>
+  <a name="_on_add">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_on_add</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_on_add" title="main.BudgetApp._on_add">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Обработчик добавления новой транзакции.</p>
+<p>Считывает данные из формы, вызывает соответствующий метод логики
+(add_income или add_expenses), очищает поля формы и обновляет таблицу.
+Отображает сообщения об успехе или ошибках валидации.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._on_delete">
+    
+  </a>
+  <a name="_on_delete">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_on_delete</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_on_delete" title="main.BudgetApp._on_delete">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Обработчик удаления транзакции.</p>
+<p>Запрашивает подтверждение пользователя, удаляет выбранную
+транзакцию из БД и обновляет таблицу.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._on_edit">
+    
+  </a>
+  <a name="_on_edit">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_on_edit</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_on_edit" title="main.BudgetApp._on_edit">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Обработчик редактирования транзакции.</p>
+<p>Получает ID выбранной транзакции, загружает данные из БД,
+открывает диалоговое окно редактирования. После подтверждения
+сохраняет изменения и обновляет таблицу.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._on_refresh">
+    
+  </a>
+  <a name="_on_refresh">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_on_refresh</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_on_refresh" title="main.BudgetApp._on_refresh">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Обновляет список транзакций в таблице.</p>
+<p>Перезагружает данные из БД и отображает сообщение об успехе.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._on_show_stats">
+    
+  </a>
+  <a name="_on_show_stats">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_on_show_stats</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_on_show_stats" title="main.BudgetApp._on_show_stats">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Показывает окно со статистикой доходов, расходов и баланса.</p>
+<p>Вычисляет статистику с учетом фильтра дат (если установлен),
+добавляет информацию о копилках. Отображает результаты в messagebox.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._refresh_savings">
+    
+  </a>
+  <a name="_refresh_savings">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_refresh_savings</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_refresh_savings" title="main.BudgetApp._refresh_savings">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Обновляет список копилок с цветовым кодированием прогресса.</p>
+<p>Загружает копилки из БД, вычисляет процент выполнения каждой,
+применяет цветовое кодирование:
+- Красный: &lt; 25%
+- Красно-оранжевый: 25-49%
+- Оранжевый: 50-74%
+- Зеленый: 75-99%
+- Темно-зеленый: 100%+</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._reset_date_filter">
+    
+  </a>
+  <a name="_reset_date_filter">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_reset_date_filter</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_reset_date_filter" title="main.BudgetApp._reset_date_filter">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Сбрасывает фильтр дат, показывая все транзакции.</p>
+<p>Очищает переменные фильтра и поля ввода, обновляет таблицу.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._set_default_date_filter">
+    
+  </a>
+  <a name="_set_default_date_filter">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_set_default_date_filter</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_set_default_date_filter" title="main.BudgetApp._set_default_date_filter">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Устанавливает фильтр дат по умолчанию на последние 30 дней.</p>
+<p>Вычисляет даты начала (30 дней назад) и конца (сегодня) периода,
+заполняет соответствующие поля ввода.</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._show_context_menu">
+    
+  </a>
+  <a name="_show_context_menu">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_show_context_menu</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span>, </span><span class="rst-sig-param">event</span>):</span>
+    
+    <a class="headerLink" href="#_show_context_menu" title="main.BudgetApp._show_context_menu">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Отображает контекстное меню при клике правой кнопкой мыши.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">event:</span>tk.Event</td><td class="fieldArgDesc">Событие клика мыши, содержит координаты</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="main.BudgetApp._withdraw_money">
+    
+  </a>
+  <a name="_withdraw_money">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span>&#160;<span class="py-defname">_withdraw_money</span><span class="function-signature">(<span class="rst-sig-param"><span class="rst-undocumented">self</span></span>):</span>
+    
+    <a class="headerLink" href="#_withdraw_money" title="main.BudgetApp._withdraw_money">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Снимает деньги из выбранной копилки.</p>
+<p>Запрашивает сумму снятия через диалоговое окно (не больше доступного баланса).
+Сумма добавляется в общий баланс как доход с категорией "Из копилки: {название}".</p>
+</div>
+  </div>
+</div>
+        </div>
+      
+      </main>
+    </div>
+
+    <footer class="navbar navbar-default">
+
+  
+  <div class="container-fluid">
+    <a href="index.html">API Documentation</a> for database/logic/main,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    25.10.1 at 2025-12-13 02:55:42.
+  </div>
+
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>
