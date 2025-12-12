@@ -544,7 +544,7 @@ class BudgetApp(tk.Tk):
 
         self.graph(daily, title)
 
-    #  МЕТОДЫ ДЛЯ КОПИЛОК И ЦЕЛЕЙ
+    # методы для копилок и целей
 
     def _refresh_savings(self):
         """

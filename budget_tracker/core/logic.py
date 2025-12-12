@@ -1,6 +1,6 @@
 import sqlite3
 from datetime import datetime
-from budget_tracker.core.database import DataBase, DataBaseForSavings
+from core.database import DataBase, DataBaseForSavings
 
 
 class Logic:
@@ -30,7 +30,7 @@ class Logic:
         self.balance = 0
         self._update_balance()
 
-    # ---------- проверки ----------
+    #проверки
 
     def date_validation(self, date_str):
         """
@@ -103,7 +103,7 @@ class Logic:
             raise ValueError("Тип транзакции должен быть 'income' или 'expense'")
         return t_type
 
-    # ---------- служебное ----------
+    #служебное
 
     def _update_balance(self):
         """
@@ -131,7 +131,7 @@ class Logic:
                 return row
         raise ValueError(f"Цель с ID {goal_id} не найдена")
 
-    # ---------- транзакции ----------
+    #транзакции
 
     def add_transaction(self, t_type, summ, category, date):
         """
@@ -281,7 +281,7 @@ class Logic:
         return self.delete_transaction_by_id(trans_id)
 
 
-    # ---------- копилки ----------
+    #копилки
 
     def calculate_progress(self, goal):
         """
@@ -366,7 +366,7 @@ class Logic:
         today = datetime.now().strftime("%d.%m.%y")
         self.add_income(amount, f"Из копилки: {name[:36]}", today)
 
-    # ---------- фильтрация ----------
+    #фильтрация
 
     def filter_transactions_by_date_range(self, start_date, end_date):
         """

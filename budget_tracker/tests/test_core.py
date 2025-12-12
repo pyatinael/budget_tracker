@@ -2,8 +2,27 @@ import os
 import tempfile
 import unittest
 from datetime import datetime
-
 from core.logic import Logic
+
+
+import unittest
+import sys
+import os
+from unittest.mock import Mock, patch
+# Добавляем путь к папке core для импорта
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'core'))
+
+from core.main import BudgetApp
+
+
+# Импортируем все необходимые библиотеки:
+# os - для работы с операционной системой (чтобы работать с файлами и проверять существование тестовой базы данных)
+# sqlite3 - для работы с базой данных
+# unittest - используется для написания тестов
+import os
+import sqlite3
+import unittest
+from core.database import DataBase
 
 
 class TestLogic(unittest.TestCase):
@@ -41,16 +60,6 @@ class TestLogic(unittest.TestCase):
     def test_amount_validation_ok(self):
         self.assertEqual(self.logic.amount_validation("10.5"), 10.5)
         self.assertEqual(self.logic.amount_validation(7), 7.0)
-
-import unittest
-import sys
-import os
-from unittest.mock import Mock, patch
-
-# Добавляем путь к папке core для импорта
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'core'))
-
-from core.main import BudgetApp
 
 
 class TestBudgetApp(unittest.TestCase):
@@ -345,16 +354,6 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     unittest.main()
-
-# Импортируем все необходимые библиотеки:
-# os - для работы с операционной системой (чтобы работать с файлами и проверять существование тестовой базы данных)
-# sqlite3 - для работы с базой данных
-# unittest - используется для написания тестов
-import os
-import sqlite3
-import unittest
-
-from core.database import DataBase
 
 
 class DataBaseTest(unittest.TestCase):
