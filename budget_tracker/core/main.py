@@ -373,7 +373,7 @@ class BudgetApp(tk.Tk):
             self.status_var.set("❌ Выберите транзакцию")
             return
 
-        # Получаем данные транзакции из БД по реальному ID
+        # Получаем данные транзакции из БД по ID
         transaction = self.logic.get_transaction_by_id(transaction_id)
         if not transaction:
             self.status_var.set("❌ Транзакция не найдена")
@@ -544,7 +544,7 @@ class BudgetApp(tk.Tk):
 
         self.graph(daily, title)
 
-    # ========== МЕТОДЫ ДЛЯ КОПИЛОК ==========
+    #  МЕТОДЫ ДЛЯ КОПИЛОК И ЦЕЛЕЙ
 
     def _refresh_savings(self):
         """
@@ -585,7 +585,7 @@ class BudgetApp(tk.Tk):
                 f"{progress:.0f}%"
             ), tags=(str(id_), tag))
 
-        # Настраиваем цвета прогресса
+        # Настраиваю цвета прогресса
         self.savings_tree.tag_configure("complete", foreground="#1B5E20")   # Темно-зеленый (100%)
         self.savings_tree.tag_configure("high", foreground="#388E3C")       # Зеленый (75%+)
         self.savings_tree.tag_configure("medium", foreground="#F57C00")     # Оранжевый (50%+)
