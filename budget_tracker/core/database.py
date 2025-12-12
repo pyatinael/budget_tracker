@@ -17,7 +17,7 @@ class DataBase:
 
     def create_db(self):
         """
-            Метод, отвечающий за создание таблицы transactions, при условии: что онв еще не создана
+            Метод, отвечающий за создание таблицы transactions, при условии: что она еще не создана
 
             В таблице есть поля:
             id: INTEGER PRIMARY KEY, AUTOINCREMENT,
@@ -28,19 +28,24 @@ class DataBase:
 
             Метод автоматически открывает и закрывает соединение
         """
-        with sqlite3.connect(self.path) as db:
-            cursor = db.cursor()
-            query = """
-                CREATE TABLE IF NOT EXISTS transactions (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    amount REAL,
-                    category TEXT,
-                    date TEXT,
-                    type TEXT
-                )
-            """
-            cursor.execute(query)
-            db.commit()
+        try:
+            with sqlite3.connect(self.path) as db:
+                cursor = db.cursor()
+                query = """
+                    CREATE TABLE IF NOT EXISTS transactions (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        amount REAL,
+                        category TEXT,
+                        date TEXT,
+                        type TEXT
+                    )
+                """
+                cursor.execute(query)
+                db.commit()
+        except sqlite3.Error as error:
+            print("Ошибка при создании таблицы", error)
+        except OSError as error:
+            print("Ошибка файлов", error)
 
     def add_transaction(self, amount, category, date, type_):
         """
@@ -52,23 +57,33 @@ class DataBase:
             type: str тип транзакции "доход", "расход"
 
         """
-        with sqlite3.connect(self.path) as db:
-            cursor = db.cursor()
-            query = """
-                INSERT INTO transactions (amount, category, date, type)
-                VALUES (?, ?, ?, ?)
-            """
-            cursor.execute(query, (amount, category, date, type_))
-            db.commit()
+        try:
+            with sqlite3.connect(self.path) as db:
+                cursor = db.cursor()
+                query = """
+                    INSERT INTO transactions (amount, category, date, type)
+                    VALUES (?, ?, ?, ?)
+                """
+                cursor.execute(query, (amount, category, date, type_))
+                db.commit()
+        except sqlite3.Error as error:
+            print("Ошибка при при попытке добавления транзакции:", error)
+        except OSError as error:
+            print("Ошибка файлов", error)
 
     def get_all_transactions(self):
         """
             Возвращает список всех транзакций(список кортежей, кортеж - строка таблицы) из таблицы transactions
         """
-        with sqlite3.connect(self.path) as db:
-            cursor = db.cursor()
-            cursor.execute("SELECT * FROM transactions")
-            return cursor.fetchall()
+        try:
+            with sqlite3.connect(self.path) as db:
+                cursor = db.cursor()
+                cursor.execute("SELECT * FROM transactions")
+                return cursor.fetchall()
+        except sqlite3.Error as error:
+            print("Ошибка при попытке прочтения транзакций:", error)
+        except OSError as error:
+            print("Ошибка файлов", error)
 
     def get_transaction(self, id):
         """
@@ -76,10 +91,15 @@ class DataBase:
 
             id : int идентификатор записи
         """
-        with sqlite3.connect(self.path) as db:
-            cursor = db.cursor()
-            cursor.execute(""" SELECT * FROM transactions WHERE id=? """, (id,))
-            return cursor.fetchone()
+        try:
+            with sqlite3.connect(self.path) as db:
+                cursor = db.cursor()
+                cursor.execute(""" SELECT * FROM transactions WHERE id=? """, (id,))
+                return cursor.fetchone()
+        except sqlite3.Error as error:
+            print("Ошибка при попытке прочтения транзакции:", error)
+        except OSError as error:
+            print("Ошибка файлов", error)
 
     def delete_transaction(self, id):
         """
@@ -87,10 +107,15 @@ class DataBase:
 
             id : int идентификатор записи, которую нужно удалить
         """
-        with sqlite3.connect(self.path) as db:
-            cursor = db.cursor()
-            cursor.execute(""" DELETE FROM transactions WHERE id=?""", (id,))
-            db.commit()
+        try:
+            with sqlite3.connect(self.path) as db:
+                cursor = db.cursor()
+                cursor.execute(""" DELETE FROM transactions WHERE id=?""", (id,))
+                db.commit()
+        except sqlite3.Error as error:
+            print("Ошибка при попытке удалить транзакцию", error)
+        except OSError as error:
+            print("Ошибка файлов", error)
 
     def update_transaction(self, id, amount, category, date, type_):
         """
@@ -103,11 +128,16 @@ class DataBase:
             type_ : str новый тип транзакции "доход", "расход"
 
         """
-        with sqlite3.connect(self.path) as db:
-            cursor = db.cursor()
-            query = """ UPDATE transactions SET amount=?, category=?, date=?, type=? WHERE id=? """
-            cursor.execute(query, (amount, category, date, type_, id))
-            db.commit()
+        try:
+            with sqlite3.connect(self.path) as db:
+                cursor = db.cursor()
+                query = """ UPDATE transactions SET amount=?, category=?, date=?, type=? WHERE id=? """
+                cursor.execute(query, (amount, category, date, type_, id))
+                db.commit()
+        except sqlite3.Error as error:
+            print("Ошибка при попытке обновить таблицу с транзакциями", error)
+        except OSError as error:
+            print("Ошибка файлов", error)
 
 
 class DataBaseForSavings:
@@ -157,23 +187,33 @@ class DataBaseForSavings:
             current_amount: float сколько накоплено
 
         """
-        with sqlite3.connect(self.path) as db:
-            cursor = db.cursor()
-            query = """
-                INSERT INTO savings (name, target_amount, current_amount)
-                VALUES (?, ?, ?)
-            """
-            cursor.execute(query, (name, target_amount, current_amount))
-            db.commit()
+        try:
+            with sqlite3.connect(self.path) as db:
+                cursor = db.cursor()
+                query = """
+                    INSERT INTO savings (name, target_amount, current_amount)
+                    VALUES (?, ?, ?)
+                """
+                cursor.execute(query, (name, target_amount, current_amount))
+                db.commit()
+        except sqlite3.Error as error:
+            print("Ошибка при попытке добавления новой цели или суммы в существующую цель", error)
+        except OSError as error:
+            print("Ошибка файлов", error)
 
     def get_goal(self):
         """
             Возвращает список всех целей (список кортежей, кортеж - строка таблицы) из таблицы savings
         """
-        with sqlite3.connect(self.path) as db:
-            cursor = db.cursor()
-            cursor.execute("SELECT * FROM savings")
-            return cursor.fetchall()
+        try:
+            with sqlite3.connect(self.path) as db:
+                cursor = db.cursor()
+                cursor.execute("SELECT * FROM savings")
+                return cursor.fetchall()
+        except sqlite3.Error as error:
+            print("Ошибка при попытке получения списка целей", error)
+        except OSError as error:
+            print("Ошибка файлов", error)
 
     def delete_goal(self, id):
         """
@@ -181,23 +221,42 @@ class DataBaseForSavings:
 
             id : int идентификатор записи, которую нужно удалить
         """
-        with sqlite3.connect(self.path) as db:
-            cursor = db.cursor()
-            cursor.execute(""" DELETE FROM savings WHERE id=?""", (id,))
-            db.commit()
+        try:
+            with sqlite3.connect(self.path) as db:
+                cursor = db.cursor()
+                cursor.execute(""" DELETE FROM savings WHERE id=?""", (id,))
+                db.commit()
+        except sqlite3.Error as error:
+            print("Ошибка при попытке удаления цели", error)
+        except OSError as error:
+            print("Ошибка файлов", error)
 
     def update_goal_amount(self, id, name, target_amount, current_amount):
         """
-            Обновляет накопление
+        Обновляет данные цели (копилки) в базе данных.
 
-            id : int идентификатор записи, которую нужно обновить
-            name : str название цели
-            target_amount : float сколько нужно накопить
-            current_amount: float сколько накоплено
+        :param id: идентификатор цели, которую нужно обновить.
+        :type id: int
+        :param name: новое название цели.
+        :type name: str
+        :param target_amount: требуемая сумма для достижения цели.
+        :type target_amount: float
+        :param current_amount: текущая накопленная сумма.
+        :type current_amount: float
 
+        :returns: None
+        :rtype: NoneType
+
+        :raises sqlite3.Error: при ошибках выполнения SQL-запроса.
+        :raises OSError: при ошибках, связанных с файловой системой.
         """
-        with sqlite3.connect(self.path) as db:
-            cursor = db.cursor()
-            query = """ UPDATE savings SET name=?, target_amount=?, current_amount=? WHERE id=? """
-            cursor.execute(query, (name, target_amount, current_amount, id))
-            db.commit()
+        try:
+            with sqlite3.connect(self.path) as db:
+                cursor = db.cursor()
+                query = """ UPDATE savings SET name=?, target_amount=?, current_amount=? WHERE id=? """
+                cursor.execute(query, (name, target_amount, current_amount, id))
+                db.commit()
+        except sqlite3.Error as error:
+            print("Ошибка при попытке обновления списка целей", error)
+        except OSError as error:
+            print("Ошибка файлов", error)
