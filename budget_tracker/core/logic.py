@@ -1,9 +1,9 @@
 import sqlite3
 from datetime import datetime
-from core.database import DataBase, DataBaseForSavings
+from database import DataBase, DataBaseForSavings
 
 
-class Logic:
+class Logic():
     def __init__(self, db_path="transactions.db", savings_db_path="savings.db"):
         """
         Инициализирует основной класс логики приложения.

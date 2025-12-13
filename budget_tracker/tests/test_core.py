@@ -4,10 +4,7 @@ import unittest
 from datetime import datetime
 from core.logic import Logic
 
-
-import unittest
 import sys
-import os
 from unittest.mock import Mock, patch
 # Добавляем путь к папке core для импорта
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'core'))
@@ -19,9 +16,8 @@ from core.main import BudgetApp
 # os - для работы с операционной системой (чтобы работать с файлами и проверять существование тестовой базы данных)
 # sqlite3 - для работы с базой данных
 # unittest - используется для написания тестов
-import os
+
 import sqlite3
-import unittest
 from core.database import DataBase
 
 
